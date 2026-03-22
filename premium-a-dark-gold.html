@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastico Hair Design - Dark & Gold</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0a0a0a;
+            --charcoal: #141414;
+            --dark-gray: #1e1e1e;
+            --gold: #c9a84c;
+            --gold-light: #e0c872;
+            --cream: #f5f0e8;
+            --text-muted: #8a8580;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--black);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 2.5rem;
+            transition: background .3s, backdrop-filter .3s;
+        }
+        nav.scrolled { background: rgba(10,10,10,.92); backdrop-filter: blur(12px); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-decoration: none; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--cream); text-decoration: none; font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; opacity: .8; transition: opacity .3s; }
+        .nav-links a:hover { opacity: 1; }
+        .btn-reserve { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--black); padding: .6rem 1.4rem; border-radius: 2px; font-weight: 600; font-size: .8rem; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=1400&q=80') center/cover no-repeat;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,10,.88) 0%, rgba(10,10,10,.7) 50%, rgba(10,10,10,.85) 100%);
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 680px; padding: 2rem 3rem; }
+        .hero-icon { color: var(--gold); font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.8rem; font-weight: 700; line-height: 1.1; margin-bottom: .5rem; }
+        .hero h1 em { font-style: italic; color: var(--gold); font-weight: 600; }
+        .hero .tagline { font-size: .9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+        .hero-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 1.5rem; }
+        .hero p { font-size: 1rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2rem; max-width: 520px; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--black); padding: .9rem 2rem; text-decoration: none; font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: transform .3s; }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-outline { border: 1px solid var(--gold); color: var(--gold); padding: .9rem 2rem; text-decoration: none; font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: background .3s, color .3s; }
+        .btn-outline:hover { background: var(--gold); color: var(--black); }
+
+        /* PROMISES */
+        .promises { background: var(--charcoal); padding: 4rem 2.5rem; }
+        .promises-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .promise-item { text-align: center; }
+        .promise-item i { font-size: 1.8rem; color: var(--gold); margin-bottom: .8rem; display: block; }
+        .promise-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; margin-bottom: .4rem; }
+        .promise-item p { font-size: .78rem; color: var(--text-muted); }
+
+        /* GALLERY */
+        .gallery { padding: 5rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; margin-bottom: .5rem; }
+        .section-header .line { width: 50px; height: 2px; background: var(--gold); margin: 0 auto .8rem; }
+        .section-header p { color: var(--text-muted); font-size: .9rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .gallery-grid img { width: 100%; height: 260px; object-fit: cover; border-radius: 4px; filter: brightness(.9); transition: filter .3s, transform .3s; }
+        .gallery-grid img:hover { filter: brightness(1); transform: scale(1.02); }
+
+        /* SERVICES */
+        .services { padding: 5rem 2.5rem; background: var(--charcoal); }
+        .services-inner { max-width: 750px; margin: 0 auto; }
+        .menu-item { display: flex; justify-content: space-between; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid rgba(201,168,76,.15); }
+        .menu-item-left h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: .3rem; }
+        .menu-item-left p { font-size: .8rem; color: var(--text-muted); }
+        .menu-price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); white-space: nowrap; margin-left: 1rem; }
+
+        /* EXPERIENCE */
+        .experience { padding: 5rem 2.5rem; }
+        .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto; align-items: center; }
+        .experience-img { width: 100%; height: 420px; object-fit: cover; border-radius: 4px; }
+        .experience-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 1rem; }
+        .experience-text p { font-size: .92rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* TESTIMONIALS */
+        .testimonials { padding: 5rem 2.5rem; background: var(--charcoal); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .testimonial { background: var(--dark-gray); padding: 2rem; border-radius: 4px; border-top: 3px solid var(--gold); }
+        .testimonial .stars { color: var(--gold); margin-bottom: .8rem; font-size: .85rem; }
+        .testimonial blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; line-height: 1.6; margin-bottom: 1rem; }
+        .testimonial cite { font-size: .78rem; color: var(--text-muted); font-style: normal; }
+
+        /* CTA */
+        .cta {
+            padding: 6rem 2.5rem; text-align: center;
+            background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1400&q=80') center/cover no-repeat;
+            position: relative;
+        }
+        .cta::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,10,.85); }
+        .cta-content { position: relative; z-index: 2; }
+        .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; margin-bottom: .8rem; }
+        .cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* FOOTER */
+        footer { padding: 3rem 2.5rem; text-align: center; border-top: 1px solid rgba(201,168,76,.15); }
+        footer .logo { display: block; margin-bottom: 1rem; }
+        footer p { font-size: .78rem; color: var(--text-muted); margin-bottom: .3rem; }
+        footer a { color: var(--gold); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.6rem; }
+            .hero-content { padding: 2rem 1.5rem; }
+            .promises-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .experience-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .nav-links a:not(.btn-reserve) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">FANTASTICO</a>
+    <div class="nav-links">
+        <a href="#services">Menu</a>
+        <a href="#experience">Experience</a>
+        <a href="https://portal.312itconsulting.com" class="btn-reserve">Reserve</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <i class="fa-solid fa-scissors hero-icon"></i>
+        <h1>Fantastico <em>Hair Design</em></h1>
+        <div class="tagline">A Premium Grooming Experience</div>
+        <div class="hero-divider"></div>
+        <p>Indulge in the art of grooming. Expert barbers, luxurious products, and an atmosphere designed for the modern gentleman.</p>
+        <div class="hero-buttons">
+            <a href="https://portal.312itconsulting.com" class="btn-primary">Book Your Experience</a>
+            <a href="#services" class="btn-outline">View Menu</a>
+        </div>
+    </div>
+</section>
+
+<section class="promises">
+    <div class="promises-grid">
+        <div class="promise-item">
+            <i class="fa-solid fa-pump-soap"></i>
+            <h3>Premium Products</h3>
+            <p>Only the finest grooming products</p>
+        </div>
+        <div class="promise-item">
+            <i class="fa-solid fa-user-tie"></i>
+            <h3>Master Barbers</h3>
+            <p>Skilled craftsmen of their trade</p>
+        </div>
+        <div class="promise-item">
+            <i class="fa-solid fa-couch"></i>
+            <h3>Relaxed Atmosphere</h3>
+            <p>Unwind in refined comfort</p>
+        </div>
+        <div class="promise-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Online Booking</h3>
+            <p>Schedule in seconds</p>
+        </div>
+    </div>
+</section>
+
+<section class="gallery">
+    <div class="section-header">
+        <h2>Our Craft</h2>
+        <div class="line"></div>
+        <p>Precision, artistry, and attention to detail</p>
+    </div>
+    <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="Barber cutting hair">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80" alt="Barbershop interior">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80" alt="Beard grooming">
+        <img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=600&q=80" alt="Classic shave">
+        <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=600&q=80" alt="Barbershop tools">
+        <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=600&q=80" alt="Styling finish">
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="services-inner">
+        <div class="section-header">
+            <h2>The Grooming Menu</h2>
+            <div class="line"></div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>Signature Haircut</h3><p>Consultation, precision cut, wash &amp; style</p></div>
+            <div class="menu-price">$30+</div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>Beard Sculpting</h3><p>Hot towel, shaping &amp; premium oil</p></div>
+            <div class="menu-price">$20+</div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>The Complete Experience</h3><p>Haircut and beard sculpting combined</p></div>
+            <div class="menu-price">$45+</div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>Precision Line Up</h3><p>Sharp edges and detail work</p></div>
+            <div class="menu-price">$15+</div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>Classic Hot Towel Shave</h3><p>Straight razor with lather &amp; aftershave</p></div>
+            <div class="menu-price">$35+</div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-item-left"><h3>Junior Gentleman's Cut</h3><p>Ages 12 and under</p></div>
+            <div class="menu-price">$25+</div>
+        </div>
+    </div>
+</section>
+
+<section class="experience" id="experience">
+    <div class="experience-grid">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=700&q=80" alt="The Fantastico experience" class="experience-img">
+        <div class="experience-text">
+            <h2>The Fantastico Difference</h2>
+            <p>At Fantastico, every visit is more than a haircut. It is a ritual. From the moment you walk in, you are greeted with warm towels, premium beverages, and the undivided attention of a master barber.</p>
+            <p>Our craftsmen blend time-honored techniques with modern precision, ensuring every detail is perfect. Book seamlessly online and step into a world of refined grooming.</p>
+            <a href="https://portal.312itconsulting.com" class="btn-primary">Book Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="section-header">
+        <h2>What Our Clients Say</h2>
+        <div class="line"></div>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial">
+            <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
+            <blockquote>"A truly premium experience. The attention to detail is unmatched."</blockquote>
+            <cite>-- Marcus T.</cite>
+        </div>
+        <div class="testimonial">
+            <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
+            <blockquote>"The online booking makes it so easy. I never have to wait."</blockquote>
+            <cite>-- David R.</cite>
+        </div>
+        <div class="testimonial">
+            <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
+            <blockquote>"Best barbershop in town. The hot towel shave is incredible."</blockquote>
+            <cite>-- James L.</cite>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-content">
+        <h2>Your Transformation Awaits</h2>
+        <p>Reserve your appointment online and step into a world of refined grooming.</p>
+        <a href="https://portal.312itconsulting.com" class="btn-primary">Book Now</a>
+    </div>
+</section>
+
+<footer>
+    <a href="#" class="logo">FANTASTICO</a>
+    <p>Mon-Fri 9AM-7PM | Sat 8AM-5PM | Sun Closed</p>
+    <p><a href="https://portal.312itconsulting.com">Book Online</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+</script>
+</body>
+</html>
