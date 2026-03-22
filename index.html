@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastico Hair Design - Landing Page Demos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        .demos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .demo-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .demo-card:hover {
+            border-color: #555;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .demo-preview {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .d1 { background: linear-gradient(135deg, #3e2723, #1a1a1a); }
+        .d2 { background: linear-gradient(135deg, #f8f8f8, #e5e7eb); }
+        .d3 { background: linear-gradient(135deg, #0a0a0a, #1a2a1a); color: #00ff88; }
+        .d4 { background: linear-gradient(135deg, #1a1a1a, #0d0d0d); color: #d4a853; }
+        .d5 { background: linear-gradient(135deg, #fdf6ec, #e8642c); }
+
+        .demo-info {
+            padding: 1.5rem;
+        }
+
+        .demo-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .demo-info .tag {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .t1 { background: #3e2723; color: #c9a94e; }
+        .t2 { background: #dbeafe; color: #2563eb; }
+        .t3 { background: #0a2a1a; color: #00ff88; }
+        .t4 { background: #2a2010; color: #d4a853; }
+        .t5 { background: #fde8d8; color: #e8642c; }
+
+        .demo-info p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-left: 0.3rem;
+            transition: transform 0.2s;
+        }
+
+        .demo-card:hover .arrow { transform: translateX(4px); }
+
+        footer {
+            margin-top: 3rem;
+            color: #555;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fantastico Hair Design</h1>
+    <p class="subtitle">5 Landing Page Demos &mdash; Pick your favorite style</p>
+
+    <div class="demos">
+        <a href="demo1-classic.html" class="demo-card">
+            <div class="demo-preview d1">&#9986;</div>
+            <div class="demo-info">
+                <span class="tag t1">Demo 1</span>
+                <h3>Classic Barbershop <span class="arrow">&rarr;</span></h3>
+                <p>Dark wood tones, gold accents, barber pole stripes. Traditional and timeless.</p>
+            </div>
+        </a>
+
+        <a href="demo2-modern.html" class="demo-card">
+            <div class="demo-preview d2">&#9986;</div>
+            <div class="demo-info">
+                <span class="tag t2">Demo 2</span>
+                <h3>Modern Minimalist <span class="arrow">&rarr;</span></h3>
+                <p>Clean white space, blue accents, crisp typography. Professional and sleek.</p>
+            </div>
+        </a>
+
+        <a href="demo3-urban.html" class="demo-card">
+            <div class="demo-preview d3">&#9986;</div>
+            <div class="demo-info">
+                <span class="tag t3">Demo 3</span>
+                <h3>Bold Urban <span class="arrow">&rarr;</span></h3>
+                <p>Dark background, neon green accents, oversized typography. Street style energy.</p>
+            </div>
+        </a>
+
+        <a href="demo4-luxury.html" class="demo-card">
+            <div class="demo-preview d4">&#9986;</div>
+            <div class="demo-info">
+                <span class="tag t4">Demo 4</span>
+                <h3>Luxury Premium <span class="arrow">&rarr;</span></h3>
+                <p>Elegant serif fonts, gold gradients, refined layout. Upscale grooming experience.</p>
+            </div>
+        </a>
+
+        <a href="demo5-retro.html" class="demo-card">
+            <div class="demo-preview d5">&#9986;</div>
+            <div class="demo-info">
+                <span class="tag t5">Demo 5</span>
+                <h3>Retro Fun <span class="arrow">&rarr;</span></h3>
+                <p>Warm cream background, orange/teal colors, rounded shapes. Friendly and inviting.</p>
+            </div>
+        </a>
+    </div>
+
+    <footer>&copy; 2026 Fantastico Hair Design. All demos link to 313 Scheduling for booking.</footer>
+</body>
+</html>

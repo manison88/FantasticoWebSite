@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastico Hair Design - Classic Barbershop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --dark: #1a1a1a;
+            --wood: #3e2723;
+            --cream: #f5f0e8;
+            --gold: #c9a94e;
+            --red: #8b1a1a;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--cream);
+            background: var(--dark);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(26,26,26,0.6), rgba(26,26,26,0.85)),
+                        url('https://images.unsplash.com/photo-1585747860019-8e7e0e3b0a1e?w=1600') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, var(--red) 0, var(--red) 20px, var(--cream) 20px, var(--cream) 40px, #1a3a6b 40px, #1a3a6b 60px);
+        }
+
+        .logo-frame {
+            border: 3px solid var(--gold);
+            padding: 2rem 3rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .logo-frame::before,
+        .logo-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 2px solid var(--gold);
+        }
+        .logo-frame::before { top: -5px; left: -5px; border-right: none; border-bottom: none; }
+        .logo-frame::after { bottom: -5px; right: -5px; border-left: none; border-top: none; }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 0.5rem;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            margin: 1.5rem 0 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .btn-book {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-book:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        /* BARBER POLE DIVIDER */
+        .pole-divider {
+            height: 30px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--red) 0, var(--red) 10px,
+                var(--cream) 10px, var(--cream) 20px,
+                #1a3a6b 20px, #1a3a6b 30px
+            );
+        }
+
+        /* SERVICES */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--wood);
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-sub {
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            border: 1px solid rgba(201,169,78,0.3);
+            padding: 2rem;
+            transition: border-color 0.3s;
+        }
+
+        .service-card:hover { border-color: var(--gold); }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card .price {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 5rem 2rem;
+            background: var(--dark);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-img {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--wood), var(--dark));
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .about-text { max-width: 500px; }
+        .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; }
+        .about-text p { color: #aaa; line-height: 1.8; margin-bottom: 1rem; }
+
+        /* GALLERY */
+        .gallery {
+            padding: 5rem 2rem;
+            background: var(--wood);
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #2c1810, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 1px solid rgba(201,169,78,0.2);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover { transform: scale(1.05); }
+
+        /* CTA */
+        .cta {
+            padding: 5rem 2rem;
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p { color: #aaa; margin-bottom: 2rem; font-size: 1.1rem; }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-info { color: #888; line-height: 2; }
+        .footer-info a { color: var(--gold); text-decoration: none; }
+
+        .hours-grid {
+            display: inline-grid;
+            grid-template-columns: auto auto;
+            gap: 0.25rem 2rem;
+            text-align: left;
+            margin: 1.5rem 0;
+            color: #aaa;
+        }
+
+        .hours-grid span:nth-child(even) { color: var(--cream); }
+
+        footer .copy { color: #555; margin-top: 2rem; font-size: 0.85rem; }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(26,26,26,0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        nav .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--gold); }
+
+        nav .nav-book {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+        }
+
+        nav .nav-book:hover { background: #b8992e; }
+
+        @media (max-width: 768px) {
+            nav a:not(.nav-book):not(.brand) { display: none; }
+            .about-img { width: 100%; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <span class="brand">Fantastico</span>
+        <div>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="https://313scheduling.com/FANT" target="_blank" class="nav-book">Book Now</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="logo-frame">
+            <h1>Fantastico<br>Hair Design</h1>
+            <p class="tagline">Est. Tradition & Style</p>
+        </div>
+        <p class="hero-text">Where timeless craftsmanship meets modern style. Step into our chair and experience the art of the perfect cut.</p>
+        <a href="https://313scheduling.com/FANT" target="_blank" class="btn-book">Book Your Appointment</a>
+    </section>
+
+    <div class="pole-divider"></div>
+
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-sub">Crafted with precision</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="price">$30+</div>
+                <h3>Classic Haircut</h3>
+                <p>Traditional cut with hot towel finish and styling. Includes consultation.</p>
+            </div>
+            <div class="service-card">
+                <div class="price">$20+</div>
+                <h3>Beard Trim & Shape</h3>
+                <p>Expert beard sculpting with hot towel and premium beard oil treatment.</p>
+            </div>
+            <div class="service-card">
+                <div class="price">$45+</div>
+                <h3>Cut & Beard Combo</h3>
+                <p>The full experience. Haircut and beard trim with all the finishing touches.</p>
+            </div>
+            <div class="service-card">
+                <div class="price">$15+</div>
+                <h3>Line Up / Edge Up</h3>
+                <p>Clean, sharp edges and line work to keep your look fresh between cuts.</p>
+            </div>
+            <div class="service-card">
+                <div class="price">$35+</div>
+                <h3>Hot Towel Shave</h3>
+                <p>Traditional straight razor shave with hot lather and premium aftershave.</p>
+            </div>
+            <div class="service-card">
+                <div class="price">$25+</div>
+                <h3>Kids Cut</h3>
+                <p>Patient, fun haircuts for the little ones. Ages 12 and under.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="pole-divider"></div>
+
+    <section id="about">
+        <div class="about">
+            <div class="about-img">&#9986;</div>
+            <div class="about-text">
+                <p class="section-sub">Our Story</p>
+                <h2>More Than Just a Haircut</h2>
+                <p>At Fantastico Hair Design, we believe every visit should feel like an experience. Our skilled barbers combine old-school techniques with modern trends to deliver cuts that make you look and feel your best.</p>
+                <p>Walk in as a customer, walk out as family. That's the Fantastico way.</p>
+                <a href="https://313scheduling.com/FANT" target="_blank" class="btn-book" style="margin-top:1rem;">Book a Visit</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Our Work</h2>
+        <p class="section-sub">Style Gallery</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">&#128135;</div>
+            <div class="gallery-item">&#9986;</div>
+            <div class="gallery-item">&#128136;</div>
+            <div class="gallery-item">&#9994;</div>
+            <div class="gallery-item">&#128131;</div>
+            <div class="gallery-item">&#127911;</div>
+        </div>
+    </section>
+
+    <div class="pole-divider"></div>
+
+    <section class="cta">
+        <h2>Ready for a Fresh Look?</h2>
+        <p>Book your appointment online in seconds. Walk-ins also welcome.</p>
+        <a href="https://313scheduling.com/FANT" target="_blank" class="btn-book">Book Now</a>
+    </section>
+
+    <footer>
+        <span class="brand" style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#c9a94e;">Fantastico Hair Design</span>
+        <div class="hours-grid">
+            <span>Monday - Friday</span><span>9:00 AM - 7:00 PM</span>
+            <span>Saturday</span><span>8:00 AM - 5:00 PM</span>
+            <span>Sunday</span><span>Closed</span>
+        </div>
+        <div class="footer-info">
+            <a href="https://313scheduling.com/FANT" target="_blank">Book Online</a>
+        </div>
+        <p class="copy">&copy; 2026 Fantastico Hair Design. All rights reserved.</p>
+    </footer>
+</body>
+</html>
