@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastico Hair Design - Bold Statement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--black:#000;--near:#0a0a0a;--dark:#111;--panel:#161616;--mid:#1e1e1e;--muted:#555;--light:#888;--off:#ccc;--white:#fff}
+        body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+        .anim{opacity:0;transition:opacity .7s ease,transform .7s ease}.anim.up{transform:translateY(50px)}.anim.left{transform:translateX(-50px)}.anim.right{transform:translateX(50px)}.anim.sc{transform:scale(.9)}.anim.on{opacity:1;transform:none}
+
+        /* NAV */
+        nav{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;transition:background .4s}
+        nav.scrolled{background:rgba(0,0,0,.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
+        .logo{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:800;color:var(--white);letter-spacing:1px;text-decoration:none;text-transform:uppercase}
+        .nav-r{display:flex;gap:2rem;align-items:center}
+        .nav-r a{color:var(--light);text-decoration:none;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s}
+        .nav-r a:hover{color:var(--white)}
+        .btn-w{background:var(--white);color:var(--black);padding:.65rem 1.5rem;font-weight:600;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:opacity .3s}
+        .btn-w:hover{opacity:.85}
+        .btn-w-lg{padding:1rem 2.4rem;font-size:.82rem}
+        .btn-w-out{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:var(--white)}
+        .btn-w-out:hover{background:var(--white);color:var(--black)}
+
+        /* DUAL VIDEO HERO */
+        .hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+        .hero-split{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+        .hero-split video{width:100%;height:100%;object-fit:cover}
+        .hero-split .v-left{filter:grayscale(100%) brightness(.35)}
+        .hero-split .v-right{filter:grayscale(100%) brightness(.25)}
+        .hero-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.15);z-index:1}
+        .hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.3);z-index:1}
+        .hero-c{position:relative;z-index:2;padding:2rem;max-width:700px}
+        .hero h1{font-family:'Outfit',sans-serif;font-size:clamp(3rem,9vw,6rem);font-weight:800;line-height:1;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:-2px}
+        .hero p{color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.8;font-weight:300}
+        .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+        /* STATS */
+        .stats{padding:3.5rem 2.5rem;background:var(--white);color:var(--black)}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:900px;margin:0 auto;text-align:center}
+        .stat i{font-size:1.3rem;color:var(--muted);margin-bottom:.5rem;display:block}
+        .stat h3{font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:800}
+        .stat p{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+
+        /* SERVICES MASONRY */
+        .services{padding:5rem 2.5rem}
+        .sec-h{text-align:center;margin-bottom:3rem}
+        .sec-h h2{font-family:'Outfit',sans-serif;font-size:2.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+        .sec-h p{color:var(--muted);font-size:.9rem;font-weight:300;margin-top:.4rem}
+        .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:1000px;margin:0 auto}
+        .svc-card{background:var(--dark);padding:2.5rem;border:1px solid rgba(255,255,255,.04);transition:transform .3s,background .3s}
+        .svc-card:hover{transform:translateY(-6px);background:var(--panel)}
+        .svc-card i{font-size:1.5rem;color:var(--white);opacity:.6;margin-bottom:1rem;display:block}
+        .svc-card h3{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.2rem;text-transform:uppercase}
+        .svc-card .price{font-size:1.4rem;font-weight:800;margin-bottom:.8rem}
+        .svc-card p{color:var(--muted);font-size:.82rem;line-height:1.6;font-weight:300}
+
+        /* PHOTO COMPARE */
+        .compare{padding:5rem 2.5rem;background:var(--near)}
+        .compare-grid{display:grid;grid-template-columns:1fr 2px 1fr;max-width:900px;margin:0 auto;align-items:center}
+        .compare-grid img{width:100%;height:400px;object-fit:cover;filter:grayscale(100%);transition:filter .5s}
+        .compare-grid img:hover{filter:grayscale(0%)}
+        .compare-line{background:var(--white);height:100%;opacity:.2}
+        .compare-labels{display:grid;grid-template-columns:1fr 2px 1fr;max-width:900px;margin:.8rem auto 0;text-align:center}
+        .compare-labels span{font-family:'Outfit',sans-serif;font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--light)}
+
+        /* TEAM */
+        .team{padding:5rem 2.5rem}
+        .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:1000px;margin:0 auto}
+        .team-card{background:var(--panel);text-align:center;padding:2.5rem 2rem;transition:background .3s}
+        .team-card:hover{background:var(--mid)}
+        .team-card img{width:150px;height:150px;border-radius:50%;object-fit:cover;filter:grayscale(100%);margin-bottom:1.2rem;transition:filter .5s}
+        .team-card:hover img{filter:grayscale(50%)}
+        .team-card h3{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.3rem;text-transform:uppercase}
+        .team-card .tt{color:var(--light);font-size:.7rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:.8rem}
+        .team-card .td{color:var(--muted);font-size:.82rem;line-height:1.6;font-weight:300}
+        .team-card .ts{margin-top:1rem;display:flex;justify-content:center;gap:.8rem}
+        .team-card .ts a{color:var(--light);font-size:.85rem;transition:color .3s;text-decoration:none}
+        .team-card .ts a:hover{color:var(--white)}
+
+        /* SCROLLING TESTIMONIALS */
+        .reviews{padding:5rem 0 5rem 2.5rem;background:var(--near)}
+        .reviews .sec-h{padding-right:2.5rem}
+        .review-scroll{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem}
+        .review-scroll::-webkit-scrollbar{height:3px}.review-scroll::-webkit-scrollbar-track{background:var(--dark)}.review-scroll::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px}
+        .review-card{flex:0 0 350px;scroll-snap-align:start;background:var(--panel);padding:2.5rem;border:1px solid rgba(255,255,255,.04)}
+        .review-card .stars{color:var(--white);font-size:.78rem;letter-spacing:3px;margin-bottom:1rem}
+        .review-card blockquote{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:400;line-height:1.6;margin-bottom:1rem}
+        .review-card cite{color:var(--muted);font-style:normal;font-size:.72rem;text-transform:uppercase;letter-spacing:2px}
+
+        /* VIDEO CTA */
+        .vid-cta{position:relative;height:550px;overflow:hidden}
+        .vid-cta video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;filter:grayscale(100%) brightness(.2)}
+        .vid-cta .inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+        .vid-cta h2{font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;text-transform:uppercase;letter-spacing:-1px;margin-bottom:1rem}
+        .vid-cta p{color:var(--light);max-width:460px;margin-bottom:2rem;font-weight:300;line-height:1.7}
+
+        /* FOOTER */
+        footer{padding:3rem 2.5rem;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+        footer .logo{display:block;margin-bottom:1rem;font-size:1.2rem}
+        footer p{font-size:.75rem;color:var(--muted);margin-bottom:.3rem}
+        footer a{color:var(--white);text-decoration:none}
+
+        @media(max-width:768px){
+            .hero h1{font-size:3rem}
+            .hero-split{grid-template-columns:1fr}.hero-split .v-right{display:none}.hero-divider{display:none}
+            .stats-grid{grid-template-columns:repeat(2,1fr)}
+            .svc-grid{grid-template-columns:1fr}
+            .compare-grid{grid-template-columns:1fr;gap:0}.compare-line{height:2px;width:100%}.compare-grid img{height:250px}
+            .compare-labels{grid-template-columns:1fr}
+            .team-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}
+            .review-card{flex:0 0 300px}
+            .nav-r a:not(.btn-w){display:none}
+            .vid-cta{height:420px}
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="#" class="logo">Fantastico</a>
+    <div class="nav-r">
+        <a href="#services">Services</a>
+        <a href="#team">Team</a>
+        <a href="https://portal.312itconsulting.com" class="btn-w">Book Now</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-split">
+        <video class="v-left" autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4"></video>
+        <video class="v-right" autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3993804/3993804-uhd_2560_1440_25fps.mp4" type="video/mp4"></video>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-ov"></div>
+    <div class="hero-c">
+        <h1>Bold Cuts.<br>Clean Style.</h1>
+        <p>Two decades of barbering mastery. One destination for the modern gentleman. Book your transformation.</p>
+        <div class="hero-btns">
+            <a href="https://portal.312itconsulting.com" class="btn-w btn-w-lg">Book Appointment</a>
+            <a href="#services" class="btn-w btn-w-out btn-w-lg">View Services</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats anim up">
+    <div class="stats-grid">
+        <div class="stat"><i class="fa-solid fa-award"></i><h3>12+</h3><p>Years Experience</p></div>
+        <div class="stat"><i class="fa-solid fa-user-group"></i><h3>5K+</h3><p>Happy Clients</p></div>
+        <div class="stat"><i class="fa-solid fa-scissors"></i><h3>6</h3><p>Expert Barbers</p></div>
+        <div class="stat"><i class="fa-solid fa-star"></i><h3>4.9</h3><p>Average Rating</p></div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="sec-h anim up"><h2>Services</h2><p>Precision grooming at honest prices</p></div>
+    <div class="svc-grid">
+        <div class="svc-card anim up"><i class="fa-solid fa-scissors"></i><h3>Signature Haircut</h3><div class="price">$30+</div><p>Consultation, precision cut, wash and style.</p></div>
+        <div class="svc-card anim up"><i class="fa-solid fa-face-grin-beam"></i><h3>Beard Sculpting</h3><div class="price">$20+</div><p>Hot towel, shaping and premium oil finish.</p></div>
+        <div class="svc-card anim up"><i class="fa-solid fa-star"></i><h3>Complete Experience</h3><div class="price">$45+</div><p>Haircut and beard sculpting combined.</p></div>
+        <div class="svc-card anim up"><i class="fa-solid fa-bolt"></i><h3>Precision Line Up</h3><div class="price">$15+</div><p>Sharp edges and detail work.</p></div>
+        <div class="svc-card anim up"><i class="fa-solid fa-fire"></i><h3>Hot Towel Shave</h3><div class="price">$35+</div><p>Straight razor with lather and aftershave.</p></div>
+        <div class="svc-card anim up"><i class="fa-solid fa-child"></i><h3>Junior Cut</h3><div class="price">$25+</div><p>Ages 12 and under.</p></div>
+    </div>
+</section>
+
+<section class="compare anim up">
+    <div class="sec-h"><h2>The Craft</h2><p>Before the chair and after -- the Fantastico difference</p></div>
+    <div class="compare-grid">
+        <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=600&q=80" alt="Before" class="anim left">
+        <div class="compare-line"></div>
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="After" class="anim right">
+    </div>
+    <div class="compare-labels"><span>The Tools</span><span></span><span>The Result</span></div>
+</section>
+
+<section class="team" id="team">
+    <div class="sec-h anim up"><h2>The Team</h2><p>Meet the crew</p></div>
+    <div class="team-grid">
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Cole">
+            <h3>Marcus Cole</h3><div class="tt">Senior Barber</div>
+            <p class="td">15 years of precision cuts. Marcus brings old-school skill with a modern edge.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="David Chen">
+            <h3>David Chen</h3><div class="tt">Style Specialist</div>
+            <p class="td">Creative visionary with an eye for trends. Every client becomes a masterpiece.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Rivera">
+            <h3>James Rivera</h3><div class="tt">Master Barber</div>
+            <p class="td">Award-winning barber specializing in razor work. Perfection is his standard.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews">
+    <div class="sec-h anim up"><h2>Reviews</h2><p>What clients are saying</p></div>
+    <div class="review-scroll">
+        <div class="review-card"><div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"A truly premium experience. The attention to detail is unmatched."</blockquote><cite>Marcus T.</cite></div>
+        <div class="review-card"><div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"Online booking makes it so easy. I never have to wait."</blockquote><cite>David R.</cite></div>
+        <div class="review-card"><div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"Best barbershop in town. The hot towel shave is incredible."</blockquote><cite>James L.</cite></div>
+        <div class="review-card"><div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"The whole vibe is next level. Music, atmosphere, and the cut is always perfect."</blockquote><cite>Anthony M.</cite></div>
+    </div>
+</section>
+
+<section class="vid-cta">
+    <video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4"></video>
+    <div class="inner anim up">
+        <h2>Your Next Look Starts Here</h2>
+        <p>Reserve your appointment online. Walk in confident, walk out transformed.</p>
+        <a href="https://portal.312itconsulting.com" class="btn-w btn-w-lg">Book Now</a>
+    </div>
+</section>
+
+<footer>
+    <a href="#" class="logo">Fantastico</a>
+    <p>Mon-Fri 9AM-7PM | Sat 8AM-5PM | Sun Closed</p>
+    <p><a href="https://portal.312itconsulting.com">Book Online</a></p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50)});
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('on')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

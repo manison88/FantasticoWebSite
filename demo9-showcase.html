@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastico Hair Design - Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--black:#000;--near:#0a0a0a;--dark:#111;--panel:#161616;--mid:#1e1e1e;--muted:#555;--light:#888;--off:#ccc;--white:#fff}
+        body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+        .anim{opacity:0;transition:opacity .7s ease,transform .7s ease}.anim.up{transform:translateY(50px)}.anim.left{transform:translateX(-50px)}.anim.right{transform:translateX(50px)}.anim.on{opacity:1;transform:none}
+
+        /* NAV */
+        nav{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
+        .logo{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:var(--white);letter-spacing:2px;text-decoration:none}
+        .nav-r{display:flex;gap:2rem;align-items:center}
+        .nav-r a{color:var(--light);text-decoration:none;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;transition:color .3s}
+        .nav-r a:hover{color:var(--white)}
+        .btn-w{background:var(--white);color:var(--black);padding:.6rem 1.4rem;font-weight:600;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:opacity .3s}
+        .btn-w:hover{opacity:.85}
+        .btn-w-lg{padding:1rem 2.4rem;font-size:.8rem}
+        .btn-w-out{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--white)}
+        .btn-w-out:hover{background:var(--white);color:var(--black)}
+
+        /* HERO */
+        .hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+        .hero video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;filter:grayscale(100%) brightness(.3)}
+        .hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+        .hero-c{position:relative;z-index:2;padding:2rem}
+        .hero .pulse-icon{font-size:3rem;color:var(--white);opacity:.6;margin-bottom:2rem;animation:pulse 2.5s ease-in-out infinite}
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:.9}}
+        .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:700;line-height:1.05;margin-bottom:1rem;letter-spacing:-1px}
+        .hero p{color:var(--muted);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.8;font-weight:300}
+        .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+        /* HORIZONTAL SHOWCASE */
+        .showcase{padding:5rem 0 5rem 2.5rem}
+        .showcase h2{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;margin-bottom:.5rem;padding-right:2.5rem}
+        .showcase>p{color:var(--muted);font-size:.9rem;margin-bottom:2rem;font-weight:300;padding-right:2.5rem}
+        .scroll-row{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem}
+        .scroll-row::-webkit-scrollbar{height:4px}.scroll-row::-webkit-scrollbar-track{background:var(--dark)}.scroll-row::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px}
+        .scroll-row img{flex:0 0 auto;width:380px;height:280px;object-fit:cover;scroll-snap-align:start;filter:grayscale(100%);transition:filter .5s}
+        .scroll-row img:hover{filter:grayscale(0%)}
+
+        /* ALTERNATING SERVICES */
+        .alt-services{padding:5rem 2.5rem}
+        .alt-item{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1100px;margin:0 auto 1px;min-height:350px}
+        .alt-item:nth-child(even){direction:rtl}.alt-item:nth-child(even)>*{direction:ltr}
+        .alt-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:filter .5s;display:block}
+        .alt-img img:hover{filter:grayscale(0%)}
+        .alt-text{background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:3rem}
+        .alt-text h3{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;margin-bottom:.3rem}
+        .alt-text .price{font-size:1.4rem;color:var(--white);margin-bottom:1rem;font-weight:700}
+        .alt-text p{color:var(--muted);line-height:1.7;font-weight:300;font-size:.92rem}
+
+        /* TEAM */
+        .team{padding:5rem 2.5rem;background:var(--near)}
+        .sec-h{text-align:center;margin-bottom:3rem}
+        .sec-h h2{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;margin-bottom:.4rem}
+        .sec-h p{color:var(--muted);font-size:.9rem;font-weight:300}
+        .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:1000px;margin:0 auto}
+        .team-card{background:var(--panel);text-align:center;padding:2.5rem 2rem;transition:background .3s}
+        .team-card:hover{background:var(--mid)}
+        .team-card img{width:150px;height:150px;border-radius:50%;object-fit:cover;filter:grayscale(100%);margin-bottom:1.2rem;transition:filter .5s}
+        .team-card:hover img{filter:grayscale(50%)}
+        .team-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;margin-bottom:.3rem}
+        .team-card .tt{color:var(--light);font-size:.72rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:.8rem}
+        .team-card .td{color:var(--muted);font-size:.82rem;line-height:1.6;font-weight:300}
+        .team-card .ts{margin-top:1rem;display:flex;justify-content:center;gap:.8rem}
+        .team-card .ts a{color:var(--light);font-size:.85rem;transition:color .3s;text-decoration:none}
+        .team-card .ts a:hover{color:var(--white)}
+
+        /* TESTIMONIAL */
+        .test-section{padding:6rem 2.5rem;text-align:center}
+        .test-big{max-width:700px;margin:0 auto}
+        .test-big .stars{color:var(--white);font-size:.85rem;letter-spacing:3px;margin-bottom:1.5rem}
+        .test-big blockquote{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:400;line-height:1.5;margin-bottom:1.5rem}
+        .test-big cite{color:var(--muted);font-style:normal;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}
+        .test-dots{display:flex;justify-content:center;gap:.5rem;margin-top:2rem}
+        .test-dots span{width:8px;height:8px;border-radius:50%;background:var(--muted);transition:background .3s}
+        .test-dots span.active{background:var(--white)}
+
+        /* VIDEO CTA */
+        .vid-cta{position:relative;height:500px;overflow:hidden}
+        .vid-cta video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;filter:grayscale(100%) brightness(.25)}
+        .vid-cta .inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+        .vid-cta h2{font-family:'Space Grotesk',sans-serif;font-size:3rem;margin-bottom:1rem}
+        .vid-cta p{color:var(--light);max-width:460px;margin-bottom:2rem;font-weight:300;line-height:1.7}
+
+        /* FOOTER */
+        footer{padding:3rem 2.5rem;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+        footer .logo{display:block;margin-bottom:1rem;font-size:1.2rem}
+        footer p{font-size:.75rem;color:var(--muted);margin-bottom:.3rem}
+        footer a{color:var(--white);text-decoration:none}
+
+        @media(max-width:768px){
+            .hero h1{font-size:2.8rem}
+            .alt-item{grid-template-columns:1fr}
+            .alt-item:nth-child(even){direction:ltr}
+            .alt-img img{height:250px}
+            .team-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}
+            .scroll-row img{width:300px;height:220px}
+            .nav-r a:not(.btn-w){display:none}
+            .vid-cta{height:400px}.vid-cta h2{font-size:2.2rem}
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="#" class="logo">FANTASTICO</a>
+    <div class="nav-r">
+        <a href="#services">Services</a>
+        <a href="#team">Team</a>
+        <a href="https://portal.312itconsulting.com" class="btn-w">Reserve</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4"></video>
+    <div class="hero-ov"></div>
+    <div class="hero-c">
+        <i class="fa-solid fa-scissors pulse-icon"></i>
+        <h1>Fantastico Hair Design</h1>
+        <p>Where precision meets artistry. Expert barbers, premium products, seamless online booking.</p>
+        <div class="hero-btns">
+            <a href="https://portal.312itconsulting.com" class="btn-w btn-w-lg">Book Now</a>
+            <a href="#services" class="btn-w btn-w-out btn-w-lg">Our Services</a>
+        </div>
+    </div>
+</section>
+
+<section class="showcase anim up">
+    <h2>Our Craft</h2>
+    <p>Swipe through our work</p>
+    <div class="scroll-row">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="Barber cutting">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80" alt="Beard trim">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80" alt="Interior">
+        <img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=600&q=80" alt="Shave">
+        <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=600&q=80" alt="Tools">
+        <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=600&q=80" alt="Styling">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80" alt="Detail">
+    </div>
+</section>
+
+<section class="alt-services" id="services">
+    <div class="sec-h anim up"><h2>Services</h2><p>Tailored grooming for every gentleman</p></div>
+    <div class="alt-item anim up">
+        <div class="alt-img"><img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80" alt="Haircut"></div>
+        <div class="alt-text"><h3>Signature Haircut</h3><div class="price">$30+</div><p>Consultation, precision cut, wash and style. The foundation of every great look starts here.</p></div>
+    </div>
+    <div class="alt-item anim up">
+        <div class="alt-img"><img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=700&q=80" alt="Beard"></div>
+        <div class="alt-text"><h3>Beard Sculpting</h3><div class="price">$20+</div><p>Hot towel treatment, expert shaping, and premium beard oil finish for the perfect look.</p></div>
+    </div>
+    <div class="alt-item anim up">
+        <div class="alt-img"><img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=700&q=80" alt="Shave"></div>
+        <div class="alt-text"><h3>Classic Hot Towel Shave</h3><div class="price">$35+</div><p>Straight razor with premium lather and aftershave. Old-school luxury at its finest.</p></div>
+    </div>
+</section>
+
+<section class="team" id="team">
+    <div class="sec-h anim up"><h2>Meet The Team</h2><p>The craftsmen behind every cut</p></div>
+    <div class="team-grid">
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Cole">
+            <h3>Marcus Cole</h3><div class="tt">Senior Barber</div>
+            <p class="td">15 years of precision cuts and classic fades. Marcus brings old-school skill with a modern edge.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="David Chen">
+            <h3>David Chen</h3><div class="tt">Style Specialist</div>
+            <p class="td">Creative visionary with an eye for trends. David transforms every client into a walking masterpiece.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+        <div class="team-card anim up">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Rivera">
+            <h3>James Rivera</h3><div class="tt">Master Barber</div>
+            <p class="td">Award-winning barber specializing in razor work and intricate designs. Perfection is his standard.</p>
+            <div class="ts"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a></div>
+        </div>
+    </div>
+</section>
+
+<section class="test-section anim up">
+    <div class="test-big">
+        <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
+        <blockquote>"A truly premium experience. The attention to detail is unmatched in every way."</blockquote>
+        <cite>Marcus T.</cite>
+        <div class="test-dots"><span class="active"></span><span></span><span></span></div>
+    </div>
+</section>
+
+<section class="vid-cta">
+    <video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3993804/3993804-uhd_2560_1440_25fps.mp4" type="video/mp4"></video>
+    <div class="inner anim up">
+        <h2>Your Transformation Awaits</h2>
+        <p>Reserve your appointment online and step into a world of refined grooming.</p>
+        <a href="https://portal.312itconsulting.com" class="btn-w btn-w-lg">Book Now</a>
+    </div>
+</section>
+
+<footer>
+    <a href="#" class="logo">FANTASTICO</a>
+    <p>Mon-Fri 9AM-7PM | Sat 8AM-5PM | Sun Closed</p>
+    <p><a href="https://portal.312itconsulting.com">Book Online</a></p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('on')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
