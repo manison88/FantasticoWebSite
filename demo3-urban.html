@@ -5,357 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantastico Hair Design - Urban</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --black: #0a0a0a;
-            --white: #ffffff;
-            --neon: #00ff88;
-            --neon-dim: #00cc6a;
-            --gray: #888;
-            --dark-gray: #1a1a1a;
+            --black: #000;
+            --near-black: #0a0a0a;
+            --dark: #111;
+            --mid: #1a1a1a;
+            --muted: #555;
+            --light: #888;
+            --off-white: #ccc;
+            --white: #fff;
         }
 
-        body {
-            font-family: 'Barlow', sans-serif;
-            background: var(--black);
-            color: var(--white);
-        }
+        body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+        .anim { opacity: 0; transition: opacity .7s ease, transform .7s ease; }
+        .anim.up { transform: translateY(50px); }
+        .anim.scale { transform: scale(.9); }
+        .anim.on { opacity: 1; transform: none; }
 
         /* NAV */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10,10,10,0.9);
-            backdrop-filter: blur(10px);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.04);
         }
-
-        .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 4px;
-        }
-
-        .logo span { color: var(--neon); }
-
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 4px; color: var(--white); }
         nav .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-        nav a { color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .btn-neon {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border: 2px solid var(--neon);
-            color: var(--neon);
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-neon:hover {
-            background: var(--neon);
-            color: var(--black);
-            box-shadow: 0 0 30px rgba(0,255,136,0.3);
-        }
-
-        .btn-neon-fill {
-            background: var(--neon);
-            color: var(--black);
-        }
-
-        .btn-neon-fill:hover {
-            box-shadow: 0 0 40px rgba(0,255,136,0.4);
-            background: #33ff99;
-        }
-
-        .btn-lg { padding: 1.1rem 3rem; font-size: 1rem; }
+        nav a { color: var(--white); text-decoration: none; font-weight: 500; font-size: .85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-w { display: inline-block; padding: .8rem 2rem; border: 2px solid var(--white); color: var(--white); text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: .85rem; transition: all .3s; }
+        .btn-w:hover { background: var(--white); color: var(--black); }
+        .btn-w-fill { background: var(--white); color: var(--black); }
+        .btn-w-fill:hover { opacity: .85; }
+        .btn-lg { padding: 1.1rem 3rem; font-size: .95rem; }
 
         /* HERO */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 2rem; position: relative; overflow: hidden;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(0,255,136,0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(0,255,136,0.03) 0%, transparent 40%);
+        .hero video {
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            transform: translate(-50%,-50%); object-fit: cover;
+            filter: grayscale(100%) brightness(.25);
         }
-
-        .hero-content { position: relative; z-index: 1; }
-
-        .hero h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(4rem, 12vw, 10rem);
-            line-height: 0.9;
-            letter-spacing: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 .outline {
-            -webkit-text-stroke: 2px var(--white);
-            color: transparent;
-        }
-
-        .hero h1 .neon-text { color: var(--neon); }
-
-        .hero-sub {
-            font-size: 1.2rem;
-            color: var(--gray);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 3rem;
-        }
-
-        .hero-line {
-            width: 60px;
-            height: 3px;
-            background: var(--neon);
-            margin: 2rem auto;
-        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,12vw,10rem); line-height: .9; letter-spacing: 8px; margin-bottom: 1.5rem; }
+        .hero h1 .outline { -webkit-text-stroke: 2px var(--white); color: transparent; }
+        .hero-sub { font-size: 1.1rem; color: var(--light); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 3rem; }
+        .hero-line { width: 60px; height: 2px; background: var(--white); margin: 2rem auto; opacity: .5; }
 
         /* MARQUEE */
-        .marquee-bar {
-            background: var(--neon);
-            color: var(--black);
-            padding: 0.8rem 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: scroll 20s linear infinite;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
-            letter-spacing: 4px;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .marquee-bar { background: var(--white); color: var(--black); padding: .8rem 0; overflow: hidden; white-space: nowrap; }
+        .marquee-content { display: inline-block; animation: scroll 20s linear infinite; font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 4px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* SERVICES */
-        .services {
-            padding: 6rem 2rem;
-        }
+        .services { padding: 6rem 2rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; letter-spacing: 6px; }
+        .section-header .line { width: 40px; height: 2px; background: var(--white); margin: 1rem auto; opacity: .4; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1px; max-width: 1000px; margin: 0 auto; }
+        .service-item { background: var(--near-black); padding: 2.5rem; display: flex; justify-content: space-between; align-items: flex-start; transition: background .3s; border: 1px solid rgba(255,255,255,.04); }
+        .service-item:hover { background: var(--mid); }
+        .service-item h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; margin-bottom: .3rem; }
+        .service-item p { color: var(--light); font-size: .85rem; font-weight: 300; }
+        .service-item .price { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 6px;
-        }
-
-        .section-header .line {
-            width: 40px; height: 3px;
-            background: var(--neon);
-            margin: 1rem auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1px;
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #222;
-        }
-
-        .service-item {
-            background: var(--black);
-            padding: 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            transition: background 0.3s;
-        }
-
-        .service-item:hover { background: var(--dark-gray); }
-
-        .service-item h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
-        }
-
-        .service-item p { color: var(--gray); font-size: 0.9rem; }
-
-        .service-item .price {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--neon);
-        }
-
-        /* SPLIT SECTION */
-        .split {
-            display: flex;
-            min-height: 500px;
-        }
-
-        .split-left, .split-right {
-            flex: 1;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .split-left {
-            background: var(--dark-gray);
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-        }
-
-        .split-right h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            letter-spacing: 4px;
-            margin-bottom: 1.5rem;
-        }
-
-        .split-right p {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
+        /* SPLIT */
+        .split { display: flex; min-height: 500px; }
+        .split-left { flex: 1; overflow: hidden; }
+        .split-left img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+        .split-right { flex: 1; padding: 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--dark); }
+        .split-right h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 4px; margin-bottom: 1.5rem; }
+        .split-right p { color: var(--light); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1rem; font-weight: 300; }
 
         /* GALLERY */
-        .gallery {
-            padding: 6rem 2rem;
-            background: var(--dark-gray);
-        }
+        .gallery { padding: 6rem 2rem; background: var(--mid); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; max-width: 1000px; margin: 0 auto; }
+        .gallery-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: grayscale(100%); transition: filter .5s, transform .3s; cursor: pointer; }
+        .gallery-grid img:hover { filter: grayscale(0%); transform: scale(1.05); z-index: 2; }
+        .gallery-grid img.wide { grid-column: span 2; aspect-ratio: 2/1; }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .gallery-cell {
-            aspect-ratio: 1;
-            background: var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .gallery-cell:hover {
-            background: #111;
-            transform: scale(1.05);
-            z-index: 2;
-        }
-
-        .gallery-cell.wide {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
-        }
-
-        /* CTA */
-        .cta {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            letter-spacing: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .cta p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-        }
+        /* VIDEO CTA */
+        .vid-cta { position: relative; height: 450px; overflow: hidden; }
+        .vid-cta video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%,-50%); object-fit: cover; filter: grayscale(100%) brightness(.25); }
+        .vid-cta .inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+        .vid-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; letter-spacing: 6px; margin-bottom: 1rem; }
+        .vid-cta p { color: var(--light); font-size: 1.05rem; margin-bottom: 2rem; font-weight: 300; }
 
         /* FOOTER */
-        footer {
-            border-top: 1px solid #222;
-            padding: 3rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        footer .copy { color: #444; font-size: 0.85rem; }
-        footer a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
-        footer a:hover { color: var(--neon); }
-
-        .hours {
-            width: 100%;
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
+        footer { border-top: 1px solid rgba(255,255,255,.05); padding: 3rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
+        footer .copy { color: #444; font-size: .8rem; }
+        footer a { color: var(--light); text-decoration: none; font-size: .85rem; margin-left: 1.5rem; }
+        footer a:hover { color: var(--white); }
+        .hours { width: 100%; text-align: center; color: var(--light); font-size: .85rem; margin-bottom: 1rem; }
 
         @media (max-width: 768px) {
             .split { flex-direction: column; }
-            .split-left { min-height: 300px; font-size: 5rem; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-cell.wide { grid-column: span 1; aspect-ratio: 1; }
-            nav a:not(.btn-neon) { display: none; }
-            .cta h2 { font-size: 2.5rem; }
+            .split-left { min-height: 300px; }
+            .gallery-grid { grid-template-columns: repeat(2,1fr); }
+            .gallery-grid img.wide { grid-column: span 1; aspect-ratio: 1; }
+            nav a:not(.btn-w) { display: none; }
+            .vid-cta h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo">FANTA<span>S</span>TICO</div>
+        <div class="logo">FANTASTICO</div>
         <div class="nav-right">
             <a href="#services">Services</a>
             <a href="#about">About</a>
-            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-neon">Book Now</a>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Book Now</a>
         </div>
     </nav>
 
     <section class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
-            <h1>
-                <span class="outline">FANTASTICO</span><br>
-                <span class="neon-text">HAIR DESIGN</span>
-            </h1>
+            <h1><span class="outline">FANTASTICO</span><br>HAIR DESIGN</h1>
             <div class="hero-line"></div>
             <p class="hero-sub">Fresh Cuts &bull; Clean Fades &bull; Sharp Style</p>
-            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-neon btn-neon-fill btn-lg">Book Your Spot</a>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w btn-w-fill btn-lg">Book Your Spot</a>
         </div>
     </section>
 
@@ -366,95 +143,62 @@
         </div>
     </div>
 
-    <section class="services" id="services">
-        <div class="section-header">
-            <h2>SERVICES</h2>
-            <div class="line"></div>
-        </div>
+    <section class="services anim up" id="services">
+        <div class="section-header"><h2>SERVICES</h2><div class="line"></div></div>
         <div class="services-grid">
-            <div class="service-item">
-                <div>
-                    <h3>CLASSIC CUT</h3>
-                    <p>Full haircut with wash & style</p>
-                </div>
-                <span class="price">$30+</span>
-            </div>
-            <div class="service-item">
-                <div>
-                    <h3>BEARD TRIM</h3>
-                    <p>Shape up with hot towel finish</p>
-                </div>
-                <span class="price">$20+</span>
-            </div>
-            <div class="service-item">
-                <div>
-                    <h3>CUT + BEARD</h3>
-                    <p>The full combo package</p>
-                </div>
-                <span class="price">$45+</span>
-            </div>
-            <div class="service-item">
-                <div>
-                    <h3>LINE UP</h3>
-                    <p>Clean edges, sharp lines</p>
-                </div>
-                <span class="price">$15+</span>
-            </div>
-            <div class="service-item">
-                <div>
-                    <h3>HOT TOWEL SHAVE</h3>
-                    <p>Straight razor luxury</p>
-                </div>
-                <span class="price">$35+</span>
-            </div>
-            <div class="service-item">
-                <div>
-                    <h3>KIDS CUT</h3>
-                    <p>12 and under</p>
-                </div>
-                <span class="price">$25+</span>
-            </div>
+            <div class="service-item anim up"><div><h3>CLASSIC CUT</h3><p>Full haircut with wash &amp; style</p></div><span class="price">$30+</span></div>
+            <div class="service-item anim up"><div><h3>BEARD TRIM</h3><p>Shape up with hot towel finish</p></div><span class="price">$20+</span></div>
+            <div class="service-item anim up"><div><h3>CUT + BEARD</h3><p>The full combo package</p></div><span class="price">$45+</span></div>
+            <div class="service-item anim up"><div><h3>LINE UP</h3><p>Clean edges, sharp lines</p></div><span class="price">$15+</span></div>
+            <div class="service-item anim up"><div><h3>HOT TOWEL SHAVE</h3><p>Straight razor luxury</p></div><span class="price">$35+</span></div>
+            <div class="service-item anim up"><div><h3>KIDS CUT</h3><p>12 and under</p></div><span class="price">$25+</span></div>
         </div>
     </section>
 
-    <section class="split" id="about">
-        <div class="split-left">&#9986;</div>
+    <section class="split anim up" id="about">
+        <div class="split-left">
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80" alt="Barber at work">
+        </div>
         <div class="split-right">
             <h2>NOT YOUR AVERAGE BARBERSHOP</h2>
             <p>Fantastico Hair Design is where skill meets style. Our barbers don't just cut hair -- they craft looks. Whether you want a classic taper, a fresh fade, or something completely new, we've got you covered.</p>
             <p>Walk-ins welcome, but booking online guarantees your spot.</p>
-            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-neon">Book Online &rarr;</a>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Book Online <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </section>
 
-    <section class="gallery">
-        <div class="section-header">
-            <h2>THE WORK</h2>
-            <div class="line"></div>
-        </div>
+    <section class="gallery anim up">
+        <div class="section-header"><h2>THE WORK</h2><div class="line"></div></div>
         <div class="gallery-grid">
-            <div class="gallery-cell wide">&#128135;</div>
-            <div class="gallery-cell">&#128136;</div>
-            <div class="gallery-cell">&#9986;</div>
-            <div class="gallery-cell">&#9994;</div>
-            <div class="gallery-cell">&#128131;</div>
-            <div class="gallery-cell wide">&#127911;</div>
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80" alt="Cut" class="wide anim scale">
+            <img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=400&q=80" alt="Shave" class="anim scale">
+            <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=400&q=80" alt="Tools" class="anim scale">
+            <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=400&q=80" alt="Style" class="anim scale">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&q=80" alt="Interior" class="anim scale">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Detail" class="wide anim scale">
         </div>
     </section>
 
-    <section class="cta">
-        <h2>READY TO GET<br><span style="color:var(--neon)">FRESH?</span></h2>
-        <p>Book your appointment now. Your next look is one click away.</p>
-        <a href="https://portal.312itconsulting.com" target="_blank" class="btn-neon btn-neon-fill btn-lg">Book Appointment</a>
+    <section class="vid-cta">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/3993804/3993804-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="inner anim up">
+            <h2>READY TO GET FRESH?</h2>
+            <p>Book your appointment now. Your next look is one click away.</p>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w btn-w-fill btn-lg">Book Appointment</a>
+        </div>
     </section>
 
     <footer>
         <div class="hours">Mon-Fri 9AM-7PM &bull; Sat 8AM-5PM &bull; Sun Closed</div>
         <span class="copy">&copy; 2026 Fantastico Hair Design</span>
-        <div>
-            <a href="https://portal.312itconsulting.com" target="_blank">Book Online</a>
-            <a href="#services">Services</a>
-        </div>
+        <div><a href="https://portal.312itconsulting.com" target="_blank">Book Online</a><a href="#services">Services</a></div>
     </footer>
+
+    <script>
+    const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('on'); }), {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+    </script>
 </body>
 </html>

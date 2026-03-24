@@ -5,391 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantastico Hair Design - Luxury</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --black: #0d0d0d;
-            --charcoal: #1a1a1a;
-            --gold: #d4a853;
-            --gold-light: #e8c97a;
-            --cream: #f5f1eb;
-            --text: #b8b8b8;
+            --black: #000;
+            --near-black: #0a0a0a;
+            --dark: #0d0d0d;
+            --charcoal: #151515;
+            --muted: #555;
+            --light: #888;
+            --off-white: #ccc;
+            --white: #fff;
         }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--black);
-            color: var(--cream);
-        }
+        body { font-family: 'Montserrat', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+
+        .rv { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
+        .rv.u { transform: translateY(50px); }
+        .rv.l { transform: translateX(-50px); }
+        .rv.r { transform: translateX(50px); }
+        .rv.s { transform: scale(.9); }
+        .rv.on { opacity: 1; transform: none; }
 
         /* NAV */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            transition: background 0.3s;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+            background: transparent; transition: background .3s;
         }
-
-        nav.scrolled { background: rgba(13,13,13,0.95); backdrop-filter: blur(20px); }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
+        nav.scrolled { background: rgba(0,0,0,.95); backdrop-filter: blur(20px); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--white); }
         nav .links { display: flex; align-items: center; gap: 2.5rem; }
-        nav .links a {
-            color: var(--cream);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        nav .links a:hover { color: var(--gold); }
-
-        .btn-gold {
-            display: inline-block;
-            padding: 0.9rem 2.5rem;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--black);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-        }
-
-        .btn-gold:hover {
-            box-shadow: 0 4px 30px rgba(212,168,83,0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-gold-outline {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-        }
-
-        .btn-gold-outline:hover {
-            background: var(--gold);
-            color: var(--black);
-        }
-
-        .btn-lg { padding: 1.1rem 3rem; font-size: 0.85rem; }
+        nav .links a { color: var(--off-white); text-decoration: none; font-size: .78rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; transition: color .3s; }
+        nav .links a:hover { color: var(--white); }
+        .btn-w { display: inline-block; padding: .9rem 2.5rem; background: var(--white); color: var(--black); text-decoration: none; font-weight: 600; font-size: .78rem; letter-spacing: 3px; text-transform: uppercase; transition: opacity .3s; }
+        .btn-w:hover { opacity: .85; }
+        .btn-w-outline { background: transparent; border: 1px solid rgba(255,255,255,.4); color: var(--white); }
+        .btn-w-outline:hover { background: var(--white); color: var(--black); }
+        .btn-lg { padding: 1.1rem 3rem; font-size: .82rem; }
 
         /* HERO */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background: radial-gradient(ellipse at 50% 50%, rgba(212,168,83,0.06) 0%, transparent 60%);
+            min-height: 100vh; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;
         }
-
-        .hero-ornament {
-            position: absolute;
-            color: var(--gold);
-            opacity: 0.1;
-            font-size: 15rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .hero video {
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            transform: translate(-50%,-50%); object-fit: cover;
+            filter: grayscale(100%) brightness(.3);
         }
-
-        .hero-content { position: relative; z-index: 1; }
-
-        .hero-pre {
-            font-size: 0.85rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 6rem);
-            font-weight: 400;
-            line-height: 1.1;
-            letter-spacing: 4px;
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--gold);
-        }
-
-        .gold-line {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 2rem auto;
-        }
-
-        .hero-text {
-            font-size: 1rem;
-            color: var(--text);
-            max-width: 500px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-pre { font-size: .8rem; letter-spacing: 8px; text-transform: uppercase; color: var(--light); margin-bottom: 2rem; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,7vw,6rem); font-weight: 400; line-height: 1.1; letter-spacing: 4px; margin-bottom: 2rem; }
+        .hero h1 em { font-style: italic; }
+        .white-line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--white), transparent); margin: 2rem auto; opacity: .5; }
+        .hero-text { font-size: .95rem; color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; font-weight: 300; }
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
         /* PROMISE */
-        .promise {
-            padding: 5rem 2rem;
-            text-align: center;
-            border-top: 1px solid #1f1f1f;
-            border-bottom: 1px solid #1f1f1f;
-        }
-
-        .promise-grid {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .promise-item {
-            max-width: 200px;
-        }
-
-        .promise-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--gold);
-        }
-
-        .promise-item h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .promise-item p {
-            color: var(--text);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            font-weight: 300;
-        }
+        .promise { padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.05); }
+        .promise-grid { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+        .promise-item { max-width: 200px; }
+        .promise-item i { font-size: 1.6rem; margin-bottom: 1rem; color: var(--white); display: block; opacity: .7; }
+        .promise-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: .5rem; font-weight: 600; letter-spacing: 1px; }
+        .promise-item p { color: var(--muted); font-size: .82rem; line-height: 1.6; font-weight: 300; }
 
         /* SERVICES */
-        .services {
-            padding: 6rem 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header .pre {
-            font-size: 0.75rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.8rem;
-            font-weight: 400;
-        }
-
-        .menu {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: baseline;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #1f1f1f;
-        }
-
+        .services { padding: 6rem 2rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header .pre { font-size: .72rem; letter-spacing: 6px; text-transform: uppercase; color: var(--light); margin-bottom: 1rem; }
+        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; }
+        .menu { max-width: 700px; margin: 0 auto; }
+        .menu-item { display: flex; align-items: baseline; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
         .menu-item:last-child { border-bottom: none; }
+        .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; }
+        .menu-dots { flex: 1; border-bottom: 1px dotted rgba(255,255,255,.15); margin: 0 1rem; min-width: 40px; }
+        .menu-desc { color: var(--muted); font-size: .82rem; font-weight: 300; margin-top: .3rem; }
+        .menu-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--white); white-space: nowrap; }
 
-        .menu-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .menu-dots {
-            flex: 1;
-            border-bottom: 1px dotted #333;
-            margin: 0 1rem;
-            min-width: 40px;
-        }
-
-        .menu-desc {
-            color: var(--text);
-            font-size: 0.85rem;
-            font-weight: 300;
-            margin-top: 0.3rem;
-        }
-
-        .menu-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-            white-space: nowrap;
-        }
+        /* VIDEO BREAK */
+        .vid-break { position: relative; height: 500px; overflow: hidden; }
+        .vid-break video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%,-50%); object-fit: cover; filter: grayscale(100%) brightness(.25); }
+        .vid-break .inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
 
         /* EXPERIENCE */
-        .experience {
-            padding: 6rem 2rem;
-            background: var(--charcoal);
-        }
-
-        .exp-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .exp-visual {
-            aspect-ratio: 3/4;
-            background: linear-gradient(135deg, #222, #111);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6rem;
-            border: 1px solid #2a2a2a;
-        }
-
-        .exp-text h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-        }
-
-        .exp-text p {
-            color: var(--text);
-            font-weight: 300;
-            line-height: 1.9;
-            margin-bottom: 1rem;
-        }
+        .experience { padding: 6rem 2rem; background: var(--charcoal); }
+        .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: center; }
+        .exp-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); min-height: 400px; }
+        .exp-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .exp-text p { color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 1rem; }
 
         /* TESTIMONIALS */
-        .testimonials {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .test-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .test-card {
-            border: 1px solid #1f1f1f;
-            padding: 2.5rem;
-            text-align: left;
-        }
-
-        .test-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 3px; }
-
-        .test-card blockquote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            font-style: italic;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: var(--cream);
-        }
-
-        .test-card cite {
-            color: var(--text);
-            font-style: normal;
-            font-size: 0.85rem;
-            font-weight: 300;
-        }
+        .testimonials { padding: 6rem 2rem; text-align: center; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; max-width: 1000px; margin: 0 auto; }
+        .test-card { border: 1px solid rgba(255,255,255,.05); padding: 2.5rem; text-align: left; background: var(--charcoal); }
+        .test-stars { color: var(--white); font-size: .8rem; margin-bottom: 1rem; letter-spacing: 3px; }
+        .test-card blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; line-height: 1.6; margin-bottom: 1rem; }
+        .test-card cite { color: var(--muted); font-style: normal; font-size: .82rem; font-weight: 300; }
 
         /* CTA */
-        .cta {
-            padding: 6rem 2rem;
-            text-align: center;
-            background: radial-gradient(ellipse at 50% 50%, rgba(212,168,83,0.08) 0%, transparent 60%);
-        }
-
-        .cta .pre {
-            font-size: 0.75rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .cta h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .cta p {
-            color: var(--text);
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            font-size: 1.05rem;
-        }
+        .cta { padding: 6rem 2rem; text-align: center; }
+        .cta .pre { font-size: .72rem; letter-spacing: 6px; text-transform: uppercase; color: var(--light); margin-bottom: 1rem; }
+        .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 400; margin-bottom: 1rem; }
+        .cta p { color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; font-size: 1rem; }
 
         /* FOOTER */
-        footer {
-            border-top: 1px solid #1f1f1f;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--gold);
-            letter-spacing: 6px;
-            margin-bottom: 1.5rem;
-        }
-
-        footer p { color: #555; font-size: 0.85rem; line-height: 2; font-weight: 300; }
-        footer a { color: var(--gold); text-decoration: none; }
+        footer { border-top: 1px solid rgba(255,255,255,.05); padding: 3rem 2rem; text-align: center; }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--white); letter-spacing: 6px; margin-bottom: 1.5rem; text-transform: uppercase; }
+        footer p { color: var(--muted); font-size: .82rem; line-height: 2; font-weight: 300; }
+        footer a { color: var(--white); text-decoration: none; }
 
         @media (max-width: 768px) {
             .exp-grid { grid-template-columns: 1fr; }
-            .exp-visual { max-height: 300px; }
-            nav .links a:not(.btn-gold) { display: none; }
+            nav .links a:not(.btn-w) { display: none; }
             nav { padding: 1rem 1.5rem; }
+            .vid-break { height: 400px; }
         }
     </style>
 </head>
@@ -399,167 +132,99 @@
         <div class="links">
             <a href="#services">Menu</a>
             <a href="#experience">Experience</a>
-            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-gold">Reserve</a>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Reserve</a>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-ornament">&#9986;</div>
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/3993804/3993804-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <p class="hero-pre">A Premium Grooming Experience</p>
             <h1>Fantastico<br><em>Hair Design</em></h1>
-            <div class="gold-line"></div>
+            <div class="white-line"></div>
             <p class="hero-text">Indulge in the art of grooming. Expert barbers, luxurious products, and an atmosphere designed for the modern gentleman.</p>
             <div class="hero-buttons">
-                <a href="https://portal.312itconsulting.com" target="_blank" class="btn-gold btn-lg">Book Your Experience</a>
-                <a href="#services" class="btn-gold btn-gold-outline btn-lg">View Menu</a>
+                <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w btn-lg">Book Your Experience</a>
+                <a href="#services" class="btn-w btn-w-outline btn-lg">View Menu</a>
             </div>
         </div>
     </section>
 
-    <section class="promise">
+    <section class="promise rv u">
         <div class="promise-grid">
-            <div class="promise-item">
-                <div class="promise-icon">&#9830;</div>
-                <h4>Premium Products</h4>
-                <p>Only the finest grooming products touch your hair</p>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">&#9830;</div>
-                <h4>Master Barbers</h4>
-                <p>Years of experience and continuous training</p>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">&#9830;</div>
-                <h4>Relaxed Atmosphere</h4>
-                <p>A space designed for you to unwind and refresh</p>
-            </div>
-            <div class="promise-item">
-                <div class="promise-icon">&#9830;</div>
-                <h4>Online Booking</h4>
-                <p>Reserve your preferred time with ease</p>
-            </div>
+            <div class="promise-item"><i class="fa-solid fa-pump-soap"></i><h4>Premium Products</h4><p>Only the finest grooming products touch your hair</p></div>
+            <div class="promise-item"><i class="fa-solid fa-user-tie"></i><h4>Master Barbers</h4><p>Years of experience and continuous training</p></div>
+            <div class="promise-item"><i class="fa-solid fa-couch"></i><h4>Relaxed Atmosphere</h4><p>A space designed for you to unwind and refresh</p></div>
+            <div class="promise-item"><i class="fa-solid fa-calendar-check"></i><h4>Online Booking</h4><p>Reserve your preferred time with ease</p></div>
         </div>
     </section>
 
-    <section class="services" id="services">
-        <div class="section-header">
-            <p class="pre">What We Offer</p>
-            <h2>The Grooming Menu</h2>
-            <div class="gold-line"></div>
-        </div>
+    <section class="services rv u" id="services">
+        <div class="section-header"><p class="pre">What We Offer</p><h2>The Grooming Menu</h2><div class="white-line"></div></div>
         <div class="menu">
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">Signature Haircut</div>
-                    <div class="menu-desc">Consultation, precision cut, wash & style</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$30+</div>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">Beard Sculpting</div>
-                    <div class="menu-desc">Hot towel, shaping & premium oil</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$20+</div>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">The Complete Experience</div>
-                    <div class="menu-desc">Haircut and beard sculpting combined</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$45+</div>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">Precision Line Up</div>
-                    <div class="menu-desc">Sharp edges and detail work</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$15+</div>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">Classic Hot Towel Shave</div>
-                    <div class="menu-desc">Straight razor with lather & aftershave</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$35+</div>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <div class="menu-name">Junior Gentleman's Cut</div>
-                    <div class="menu-desc">Ages 12 and under</div>
-                </div>
-                <div class="menu-dots"></div>
-                <div class="menu-price">$25+</div>
-            </div>
+            <div class="menu-item rv u"><div><div class="menu-name">Signature Haircut</div><div class="menu-desc">Consultation, precision cut, wash &amp; style</div></div><div class="menu-dots"></div><div class="menu-price">$30+</div></div>
+            <div class="menu-item rv u"><div><div class="menu-name">Beard Sculpting</div><div class="menu-desc">Hot towel, shaping &amp; premium oil</div></div><div class="menu-dots"></div><div class="menu-price">$20+</div></div>
+            <div class="menu-item rv u"><div><div class="menu-name">The Complete Experience</div><div class="menu-desc">Haircut and beard sculpting combined</div></div><div class="menu-dots"></div><div class="menu-price">$45+</div></div>
+            <div class="menu-item rv u"><div><div class="menu-name">Precision Line Up</div><div class="menu-desc">Sharp edges and detail work</div></div><div class="menu-dots"></div><div class="menu-price">$15+</div></div>
+            <div class="menu-item rv u"><div><div class="menu-name">Classic Hot Towel Shave</div><div class="menu-desc">Straight razor with lather &amp; aftershave</div></div><div class="menu-dots"></div><div class="menu-price">$35+</div></div>
+            <div class="menu-item rv u"><div><div class="menu-name">Junior Gentleman's Cut</div><div class="menu-desc">Ages 12 and under</div></div><div class="menu-dots"></div><div class="menu-price">$25+</div></div>
         </div>
     </section>
 
-    <section class="experience" id="experience">
+    <section class="vid-break">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="inner rv u">
+            <p class="hero-pre">The Craft in Motion</p>
+            <h1 style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:400; margin-bottom:1rem;">Precision Meets Artistry</h1>
+            <p class="hero-text">Watch the mastery unfold. Every cut, every line, every detail.</p>
+            <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Book Now</a>
+        </div>
+    </section>
+
+    <section class="experience rv u" id="experience">
         <div class="exp-grid">
-            <div class="exp-visual">&#128136;</div>
-            <div class="exp-text">
+            <div class="exp-visual rv l"><img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=700&q=80" alt="Barbershop experience"></div>
+            <div class="exp-text rv r">
                 <div class="hero-pre" style="text-align:left; margin-bottom:1rem;">Our Philosophy</div>
                 <h2>The Fantastico Difference</h2>
                 <p>Every visit to Fantastico Hair Design is more than a haircut -- it's a ritual. From the moment you walk through our doors, you'll feel the difference that true craftsmanship and attention to detail makes.</p>
                 <p>We believe that looking your best should be effortless. That's why we've made booking seamless -- reserve your chair online and arrive to a personalized experience.</p>
-                <div style="margin-top:2rem;">
-                    <a href="https://portal.312itconsulting.com" target="_blank" class="btn-gold">Reserve Your Chair</a>
-                </div>
+                <div style="margin-top:2rem;"><a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Reserve Your Chair</a></div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <div class="section-header">
-            <p class="pre">Client Testimonials</p>
-            <h2>What They Say</h2>
-            <div class="gold-line"></div>
-        </div>
+    <section class="testimonials rv u">
+        <div class="section-header"><p class="pre">Client Testimonials</p><h2>What They Say</h2><div class="white-line"></div></div>
         <div class="test-grid">
-            <div class="test-card">
-                <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote>"A truly premium experience. The attention to detail is unmatched."</blockquote>
-                <cite>- Satisfied Client</cite>
-            </div>
-            <div class="test-card">
-                <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote>"The online booking makes it so easy. I never have to wait."</blockquote>
-                <cite>- Regular Guest</cite>
-            </div>
-            <div class="test-card">
-                <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote>"Best barbershop in town. The hot towel shave is incredible."</blockquote>
-                <cite>- First-Time Visitor</cite>
-            </div>
+            <div class="test-card rv u"><div class="test-stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"A truly premium experience. The attention to detail is unmatched."</blockquote><cite>-- Satisfied Client</cite></div>
+            <div class="test-card rv u"><div class="test-stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"The online booking makes it so easy. I never have to wait."</blockquote><cite>-- Regular Guest</cite></div>
+            <div class="test-card rv u"><div class="test-stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div><blockquote>"Best barbershop in town. The hot towel shave is incredible."</blockquote><cite>-- First-Time Visitor</cite></div>
         </div>
     </section>
 
-    <section class="cta">
+    <section class="cta rv u">
         <p class="pre">Your Transformation Awaits</p>
         <h2>Experience Fantastico</h2>
         <p>Reserve your appointment online and step into a world of refined grooming.</p>
-        <a href="https://portal.312itconsulting.com" target="_blank" class="btn-gold btn-lg">Book Now</a>
+        <a href="https://portal.312itconsulting.com" target="_blank" class="btn-w btn-lg">Book Now</a>
     </section>
 
     <footer>
         <div class="footer-logo">FANTASTICO</div>
-        <p>
-            Mon - Fri: 9AM - 7PM &bull; Sat: 8AM - 5PM &bull; Sun: Closed<br>
-            <a href="https://portal.312itconsulting.com" target="_blank">Book Online</a>
-        </p>
+        <p>Mon - Fri: 9AM - 7PM &bull; Sat: 8AM - 5PM &bull; Sun: Closed<br><a href="https://portal.312itconsulting.com" target="_blank">Book Online</a></p>
         <p style="margin-top:1.5rem;">&copy; 2026 Fantastico Hair Design. All rights reserved.</p>
     </footer>
 
     <script>
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('on'); }), {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
     </script>
 </body>
 </html>
