@@ -94,6 +94,20 @@
         .gallery-flex img { width: 150px; height: 150px; border-radius: 12px; object-fit: cover; filter: grayscale(100%); transition: filter .5s, transform .3s; cursor: pointer; }
         .gallery-flex img:hover { filter: grayscale(0%); transform: rotate(-3deg) scale(1.1); }
 
+        /* TEAM */
+        .team { padding: 5rem 2rem; background: var(--near-black); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .team-card { background: var(--panel); border: 1px solid rgba(255,255,255,.04); text-align: center; padding: 2rem; transition: border-color .3s, background .3s; }
+        .team-card:hover { border-color: rgba(255,255,255,.15); background: var(--mid); }
+        .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; filter: grayscale(100%); margin-bottom: 1.2rem; transition: filter .5s; }
+        .team-card:hover img { filter: grayscale(50%); }
+        .team-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.2rem; margin-bottom: .2rem; }
+        .team-card .team-title { color: var(--light); font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: .8rem; }
+        .team-card p.team-desc { color: var(--muted); font-size: .85rem; line-height: 1.5; font-weight: 300; }
+        .team-card .team-socials { margin-top: 1rem; display: flex; justify-content: center; gap: .8rem; }
+        .team-card .team-socials a { color: var(--light); font-size: .9rem; transition: color .3s; text-decoration: none; }
+        .team-card .team-socials a:hover { color: var(--white); }
+
         /* VIDEO CTA */
         .vid-cta { position: relative; height: 450px; overflow: hidden; }
         .vid-cta video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%,-50%); object-fit: cover; filter: grayscale(100%) brightness(.25); }
@@ -111,6 +125,7 @@
             .about-grid { grid-template-columns: 1fr; }
             nav .links a:not(.btn-pill) { display: none; }
             .facts-grid { gap: 2rem; }
+            .team-grid { grid-template-columns: 1fr; max-width: 340px; }
         }
     </style>
 </head>
@@ -182,6 +197,42 @@
             <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=300&q=80" alt="Tools" class="anim scale">
             <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=300&q=80" alt="Style" class="anim scale">
             <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=300&q=80" alt="Detail" class="anim scale">
+        </div>
+    </section>
+
+    <section class="team">
+        <div class="section-header anim up"><h2>Meet The Team</h2><p>The crew behind the cuts</p></div>
+        <div class="team-grid">
+            <div class="team-card anim up">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Cole">
+                <h3>Marcus Cole</h3>
+                <div class="team-title">Senior Barber</div>
+                <p class="team-desc">15 years of precision cuts and classic fades. Marcus brings old-school skill with a modern edge.</p>
+                <div class="team-socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card anim up">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="David Chen">
+                <h3>David Chen</h3>
+                <div class="team-title">Style Specialist</div>
+                <p class="team-desc">Creative visionary with an eye for trends. David transforms every client into a walking masterpiece.</p>
+                <div class="team-socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card anim up">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Rivera">
+                <h3>James Rivera</h3>
+                <div class="team-title">Master Barber</div>
+                <p class="team-desc">Award-winning barber specializing in razor work and intricate designs. Perfection is his standard.</p>
+                <div class="team-socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
         </div>
     </section>
 

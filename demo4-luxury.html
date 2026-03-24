@@ -98,6 +98,20 @@
         .exp-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1.5rem; }
         .exp-text p { color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 1rem; }
 
+        /* TEAM */
+        .team { padding: 6rem 2rem; text-align: center; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; max-width: 1000px; margin: 0 auto; }
+        .team-card { background: var(--charcoal); border: 1px solid rgba(255,255,255,.05); padding: 2.5rem; text-align: center; transition: border-color .3s; }
+        .team-card:hover { border-color: rgba(255,255,255,.15); }
+        .team-card img { width: 170px; height: 170px; object-fit: cover; border-radius: 50%; filter: grayscale(100%); margin-bottom: 1.2rem; transition: filter .5s; }
+        .team-card:hover img { filter: grayscale(50%); }
+        .team-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .3rem; }
+        .team-card .team-title { color: var(--light); font-size: .72rem; letter-spacing: 4px; text-transform: uppercase; font-weight: 500; margin-bottom: .8rem; }
+        .team-card p.team-desc { color: var(--muted); font-size: .85rem; line-height: 1.7; font-weight: 300; }
+        .team-card .team-social { margin-top: 1rem; }
+        .team-card .team-social a { color: var(--muted); font-size: .9rem; margin: 0 .4rem; transition: color .3s; }
+        .team-card .team-social a:hover { color: var(--white); }
+
         /* TESTIMONIALS */
         .testimonials { padding: 6rem 2rem; text-align: center; }
         .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; max-width: 1000px; margin: 0 auto; }
@@ -195,6 +209,42 @@
                 <p>Every visit to Fantastico Hair Design is more than a haircut -- it's a ritual. From the moment you walk through our doors, you'll feel the difference that true craftsmanship and attention to detail makes.</p>
                 <p>We believe that looking your best should be effortless. That's why we've made booking seamless -- reserve your chair online and arrive to a personalized experience.</p>
                 <div style="margin-top:2rem;"><a href="https://portal.312itconsulting.com" target="_blank" class="btn-w">Reserve Your Chair</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team rv u" id="team">
+        <div class="section-header"><p class="pre">Our Artisans</p><h2>Meet The Team</h2><div class="white-line"></div></div>
+        <div class="team-grid">
+            <div class="team-card rv u">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Cole">
+                <h3>Marcus Cole</h3>
+                <p class="team-title">Senior Barber</p>
+                <p class="team-desc">15 years of precision cuts and classic fades. Marcus sets the standard for every chair in the shop.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card rv u">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="David Chen">
+                <h3>David Chen</h3>
+                <p class="team-title">Style Specialist</p>
+                <p class="team-desc">A trend-forward stylist who blends modern techniques with timeless barbering fundamentals.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card rv u">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Rivera">
+                <h3>James Rivera</h3>
+                <p class="team-title">Master Barber</p>
+                <p class="team-desc">From straight razor shaves to sharp fades, James brings artistry and skill to every appointment.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
             </div>
         </div>
     </section>

@@ -95,6 +95,20 @@
         .gallery-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: grayscale(100%); transition: filter .5s, transform .4s; }
         .gallery-grid img:hover { filter: grayscale(0%); transform: scale(1.05); }
 
+        /* TEAM */
+        .team { padding: 5rem 2rem; background: var(--black); text-align: center; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1000px; margin: 2rem auto 0; }
+        .team-card { background: var(--near-black); border: 1px solid rgba(255,255,255,.06); padding: 2rem; transition: border-color .3s; }
+        .team-card:hover { border-color: rgba(255,255,255,.2); }
+        .team-card img { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; filter: grayscale(100%); margin-bottom: 1.2rem; transition: filter .5s; }
+        .team-card:hover img { filter: grayscale(50%); }
+        .team-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: .3rem; }
+        .team-card .team-title { color: var(--light); font-size: .8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: .8rem; }
+        .team-card p.team-desc { color: var(--muted); font-size: .9rem; line-height: 1.6; font-weight: 300; }
+        .team-card .team-social a { color: var(--muted); font-size: .95rem; margin: 0 .4rem; transition: color .3s; }
+        .team-card .team-social a:hover { color: var(--white); }
+        .team-card .team-social { margin-top: 1rem; }
+
         /* CTA */
         .cta { padding: 5rem 2rem; background: var(--black); text-align: center; }
         .cta h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; }
@@ -183,6 +197,43 @@
             <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=400&q=80" alt="Styling" class="reveal-s">
             <img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=400&q=80" alt="Shave" class="reveal-s">
             <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&q=80" alt="Finish" class="reveal-s">
+        </div>
+    </section>
+
+    <section class="team" id="team">
+        <h2 class="section-title reveal">Meet The Team</h2>
+        <p class="section-sub reveal">The men behind the chairs</p>
+        <div class="team-grid">
+            <div class="team-card reveal-s">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Marcus Cole">
+                <h3>Marcus Cole</h3>
+                <p class="team-title">Senior Barber</p>
+                <p class="team-desc">15 years of precision cuts and classic fades. Marcus sets the standard for every chair in the shop.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card reveal-s">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="David Chen">
+                <h3>David Chen</h3>
+                <p class="team-title">Style Specialist</p>
+                <p class="team-desc">A trend-forward stylist who blends modern techniques with timeless barbering fundamentals.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-card reveal-s">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="James Rivera">
+                <h3>James Rivera</h3>
+                <p class="team-title">Master Barber</p>
+                <p class="team-desc">From straight razor shaves to sharp fades, James brings artistry and skill to every appointment.</p>
+                <div class="team-social">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
         </div>
     </section>
 
