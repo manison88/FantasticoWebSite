@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantastico Hair Design - Midnight & Silver</title>
+    <title>Fantastico Hair Design - Premium C</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -11,115 +11,144 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --midnight: #0f1923;
-            --navy: #162230;
-            --steel: #1e2d3d;
-            --silver: #c0c7ce;
-            --silver-bright: #e2e6ea;
-            --accent: #8fa8bf;
-            --white: #f0f2f4;
-            --text-dim: #6b7d8d;
+            --black: #000;
+            --near-black: #060606;
+            --dark: #0e0e0e;
+            --panel: #151515;
+            --border: rgba(255,255,255,.06);
+            --muted: #555;
+            --light: #888;
+            --off-white: #ccc;
+            --white: #fff;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--midnight);
-            color: var(--silver-bright);
+            background: var(--near-black);
+            color: var(--white);
             overflow-x: hidden;
         }
+
+        /* ANIMATIONS */
+        .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
+        .anim.slide-up { transform: translateY(60px); }
+        .anim.slide-left { transform: translateX(-60px); }
+        .anim.slide-right { transform: translateX(60px); }
+        .anim.scale-up { transform: scale(0.88); }
+        .anim.in { opacity: 1; transform: none; }
+        .delay-1 { transition-delay: .1s; }
+        .delay-2 { transition-delay: .2s; }
+        .delay-3 { transition-delay: .3s; }
+        .delay-4 { transition-delay: .4s; }
 
         /* NAV */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
             padding: 1rem 2.5rem;
-            transition: background .3s;
+            transition: background .4s;
         }
-        nav.scrolled { background: rgba(15,25,35,.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(192,199,206,.1); }
-        .logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--silver-bright); letter-spacing: 2px; text-decoration: none; }
+        nav.scrolled { background: rgba(6,6,6,.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); letter-spacing: 3px; text-decoration: none; text-transform: uppercase; }
         .nav-right { display: flex; gap: 2rem; align-items: center; }
-        .nav-right a { color: var(--silver); text-decoration: none; font-size: .8rem; letter-spacing: 1px; text-transform: uppercase; transition: color .3s; }
+        .nav-right a { color: var(--light); text-decoration: none; font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color .3s; }
         .nav-right a:hover { color: var(--white); }
-        .btn-book { background: transparent; border: 1.5px solid var(--silver); color: var(--silver-bright); padding: .55rem 1.4rem; border-radius: 3px; font-weight: 600; font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; transition: background .3s, color .3s; }
-        .btn-book:hover { background: var(--silver-bright); color: var(--midnight); }
+        .btn-nav { border: 1px solid var(--white); color: var(--white); padding: .5rem 1.3rem; font-weight: 600; }
 
-        /* HERO */
+        /* HERO - FULL VIDEO */
         .hero { min-height: 100vh; position: relative; display: flex; align-items: flex-end; }
-        .hero-bg {
-            position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1400&q=80') center/cover no-repeat;
+        .hero video {
+            position: absolute; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.35);
         }
-        .hero-overlay {
+        .hero-gradient {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, var(--midnight) 5%, rgba(15,25,35,.75) 50%, rgba(15,25,35,.5) 100%);
+            background: linear-gradient(to top, var(--near-black) 3%, transparent 60%);
         }
-        .hero-content { position: relative; z-index: 2; padding: 4rem 3rem 5rem; max-width: 700px; }
-        .hero-badge { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(192,199,206,.3); padding: .4rem 1rem; border-radius: 30px; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--silver); margin-bottom: 2rem; }
-        .hero-badge i { font-size: .8rem; }
-        .hero h1 { font-family: 'DM Serif Display', serif; font-size: 4rem; line-height: 1.08; margin-bottom: 1.5rem; color: var(--white); }
-        .hero h1 em { font-style: italic; color: var(--accent); }
-        .hero p { font-size: 1rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 480px; font-weight: 300; }
-        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .btn-solid { background: var(--silver-bright); color: var(--midnight); padding: .9rem 2.2rem; text-decoration: none; font-size: .78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 3px; transition: opacity .3s; }
-        .btn-solid:hover { opacity: .85; }
-        .btn-line { border: 1.5px solid rgba(192,199,206,.4); color: var(--silver); padding: .9rem 2.2rem; text-decoration: none; font-size: .78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 3px; transition: border-color .3s, color .3s; }
-        .btn-line:hover { border-color: var(--silver-bright); color: var(--white); }
+        .hero-content { position: relative; z-index: 2; padding: 4rem 3rem 6rem; max-width: 720px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.2); padding: .35rem 1rem; font-size: .68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 2rem; }
+        .hero-badge i { font-size: .75rem; }
+        .hero h1 { font-family: 'DM Serif Display', serif; font-size: 4.5rem; line-height: 1.05; margin-bottom: 1.5rem; }
+        .hero h1 em { font-style: italic; color: var(--off-white); }
+        .hero p { font-size: .95rem; line-height: 1.8; color: var(--muted); margin-bottom: 2.5rem; max-width: 480px; font-weight: 300; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-w { background: var(--white); color: var(--black); padding: 1rem 2.4rem; text-decoration: none; font-size: .72rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; transition: opacity .3s; }
+        .btn-w:hover { opacity: .85; }
+        .btn-g { border: 1px solid rgba(255,255,255,.3); color: var(--white); padding: 1rem 2.4rem; text-decoration: none; font-size: .72rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; transition: background .3s, color .3s; }
+        .btn-g:hover { background: var(--white); color: var(--black); }
 
         /* STATS */
-        .stats { padding: 3.5rem 2.5rem; background: var(--navy); border-top: 1px solid rgba(192,199,206,.08); border-bottom: 1px solid rgba(192,199,206,.08); }
+        .stats { padding: 4rem 2.5rem; background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; text-align: center; }
-        .stat i { font-size: 1.5rem; color: var(--accent); margin-bottom: .6rem; display: block; }
-        .stat h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--white); margin-bottom: .2rem; }
-        .stat p { font-size: .75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .stat i { font-size: 1.4rem; color: var(--white); margin-bottom: .6rem; display: block; opacity: .6; }
+        .stat h3 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--white); margin-bottom: .2rem; }
+        .stat p { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
 
         /* GALLERY */
-        .gallery { padding: 5rem 2.5rem; }
-        .section-head { text-align: center; margin-bottom: 3rem; }
-        .section-head h2 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--white); margin-bottom: .5rem; }
-        .section-head p { color: var(--text-dim); font-size: .9rem; font-weight: 300; }
-        .gallery-mosaic { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 1rem; max-width: 1000px; margin: 0 auto; }
-        .gallery-mosaic img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; transition: opacity .3s; }
-        .gallery-mosaic img:hover { opacity: .85; }
+        .gallery { padding: 6rem 2.5rem; }
+        .section-head { text-align: center; margin-bottom: 3.5rem; }
+        .section-head h2 { font-family: 'DM Serif Display', serif; font-size: 2.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: .5rem; }
+        .section-head p { color: var(--muted); font-size: .85rem; font-weight: 300; letter-spacing: 1px; }
+        .gallery-mosaic { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 230px 230px; gap: 4px; max-width: 1000px; margin: 0 auto; }
+        .gallery-mosaic img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter .6s, transform .4s; }
+        .gallery-mosaic img:hover { filter: grayscale(0%); transform: scale(1.02); }
         .gallery-mosaic img:first-child { grid-row: 1 / 3; }
 
         /* SERVICES */
-        .services { padding: 5rem 2.5rem; background: var(--navy); }
+        .services { padding: 6rem 2.5rem; background: var(--dark); }
         .services-list { max-width: 700px; margin: 0 auto; }
-        .svc { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid rgba(192,199,206,.08); }
-        .svc-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: .25rem; }
-        .svc-info p { font-size: .8rem; color: var(--text-dim); font-weight: 300; }
-        .svc-price { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--accent); }
+        .svc { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+        .svc-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: .25rem; font-weight: 400; }
+        .svc-info p { font-size: .78rem; color: var(--muted); font-weight: 300; }
+        .svc-price { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--white); }
+
+        /* VIDEO MID-SECTION */
+        .vid-mid {
+            position: relative; height: 550px; overflow: hidden;
+        }
+        .vid-mid video {
+            position: absolute; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.25);
+        }
+        .vid-mid .inner {
+            position: relative; z-index: 2;
+            height: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; padding: 2rem;
+        }
+        .vid-mid h2 { font-family: 'DM Serif Display', serif; font-size: 3.2rem; font-weight: 400; margin-bottom: 1rem; letter-spacing: 2px; }
+        .vid-mid p { color: var(--light); max-width: 500px; margin-bottom: 2rem; font-weight: 300; line-height: 1.8; }
 
         /* SPLIT */
         .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
-        .split-img { background: url('https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=900&q=80') center/cover no-repeat; }
-        .split-text { display: flex; flex-direction: column; justify-content: center; padding: 4rem; background: var(--midnight); }
-        .split-text h2 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--white); margin-bottom: 1rem; }
-        .split-text p { font-size: .92rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 1rem; font-weight: 300; }
+        .split-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(100%); min-height: 450px; }
+        .split-text { display: flex; flex-direction: column; justify-content: center; padding: 4rem; background: var(--dark); }
+        .split-text h2 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--white); margin-bottom: 1.2rem; letter-spacing: 1px; }
+        .split-text p { font-size: .9rem; line-height: 1.9; color: var(--muted); margin-bottom: 1rem; font-weight: 300; }
 
         /* REVIEWS */
-        .reviews { padding: 5rem 2.5rem; background: var(--navy); }
-        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-        .review { background: var(--steel); padding: 2rem; border-radius: 8px; }
-        .review .stars { color: var(--accent); margin-bottom: .8rem; font-size: .85rem; }
-        .review blockquote { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-style: italic; line-height: 1.6; color: var(--silver-bright); margin-bottom: 1rem; }
-        .review cite { font-size: .75rem; color: var(--text-dim); font-style: normal; text-transform: uppercase; letter-spacing: 1px; }
+        .reviews { padding: 6rem 2.5rem; background: var(--near-black); }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; max-width: 1000px; margin: 0 auto; }
+        .review { background: var(--panel); padding: 2.5rem; }
+        .review .stars { color: var(--white); margin-bottom: 1rem; font-size: .78rem; letter-spacing: 3px; }
+        .review blockquote { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-style: italic; line-height: 1.7; margin-bottom: 1.2rem; }
+        .review cite { font-size: .7rem; color: var(--muted); font-style: normal; text-transform: uppercase; letter-spacing: 2px; }
 
         /* BOTTOM CTA */
-        .bottom-cta {
-            padding: 6rem 2.5rem; text-align: center; position: relative;
-            background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1400&q=80') center/cover no-repeat;
-        }
-        .bottom-cta::before { content: ''; position: absolute; inset: 0; background: rgba(15,25,35,.88); }
-        .bottom-cta > * { position: relative; z-index: 2; }
-        .bottom-cta h2 { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--white); margin-bottom: .8rem; }
-        .bottom-cta p { color: var(--text-dim); margin-bottom: 2rem; max-width: 460px; margin-left: auto; margin-right: auto; font-weight: 300; }
+        .bottom-cta { padding: 8rem 2.5rem; text-align: center; border-top: 1px solid var(--border); }
+        .bottom-cta h2 { font-family: 'DM Serif Display', serif; font-size: 3rem; font-weight: 400; margin-bottom: .8rem; letter-spacing: 2px; }
+        .bottom-cta p { color: var(--muted); margin-bottom: 2.5rem; max-width: 450px; margin-left: auto; margin-right: auto; font-weight: 300; }
 
         /* FOOTER */
-        footer { padding: 2.5rem; text-align: center; border-top: 1px solid rgba(192,199,206,.08); }
-        footer .logo { display: block; margin-bottom: .8rem; }
-        footer p { font-size: .75rem; color: var(--text-dim); margin-bottom: .3rem; }
-        footer a { color: var(--accent); text-decoration: none; }
+        footer { padding: 2.5rem; text-align: center; border-top: 1px solid var(--border); }
+        footer .logo { display: block; margin-bottom: .8rem; font-size: 1.1rem; }
+        footer p { font-size: .72rem; color: var(--muted); margin-bottom: .3rem; }
+        footer a { color: var(--white); text-decoration: none; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
@@ -128,39 +157,43 @@
             .gallery-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
             .gallery-mosaic img:first-child { grid-row: auto; }
             .split { grid-template-columns: 1fr; }
-            .split-img { height: 300px; }
+            .split-img img { height: 300px; }
             .split-text { padding: 3rem 2rem; }
             .reviews-grid { grid-template-columns: 1fr; }
-            .nav-right a:not(.btn-book) { display: none; }
+            .nav-right a:not(.btn-nav) { display: none; }
+            .vid-mid { height: 420px; }
+            .vid-mid h2 { font-size: 2.4rem; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#" class="logo">FANTASTICO</a>
+    <a href="#" class="logo">Fantastico</a>
     <div class="nav-right">
         <a href="#services">Services</a>
         <a href="#story">Our Story</a>
-        <a href="https://portal.312itconsulting.com" class="btn-book">Reserve</a>
+        <a href="https://portal.312itconsulting.com" class="btn-nav">Reserve</a>
     </div>
 </nav>
 
 <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
+    <video autoplay muted loop playsinline>
+        <source src="https://videos.pexels.com/video-files/3993804/3993804-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="hero-gradient"></div>
     <div class="hero-content">
         <div class="hero-badge"><i class="fa-solid fa-scissors"></i> Premium Grooming Studio</div>
         <h1>Crafted for the <em>Modern Gentleman</em></h1>
         <p>Experience the intersection of traditional barbering and contemporary style. Expert hands, premium products, seamless booking.</p>
-        <div class="hero-actions">
-            <a href="https://portal.312itconsulting.com" class="btn-solid">Book Appointment</a>
-            <a href="#services" class="btn-line">View Services</a>
+        <div class="hero-btns">
+            <a href="https://portal.312itconsulting.com" class="btn-w">Book Appointment</a>
+            <a href="#services" class="btn-g">View Services</a>
         </div>
     </div>
 </section>
 
-<section class="stats">
+<section class="stats anim slide-up">
     <div class="stats-grid">
         <div class="stat">
             <i class="fa-solid fa-award"></i>
@@ -186,79 +219,92 @@
 </section>
 
 <section class="gallery">
-    <div class="section-head">
+    <div class="section-head anim slide-up">
         <h2>Our Work</h2>
         <p>Precision cuts, clean fades, and expert grooming</p>
     </div>
     <div class="gallery-mosaic">
-        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80" alt="Barber at work">
-        <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=500&q=80" alt="Barbershop tools">
-        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80" alt="Shop interior">
-        <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=500&q=80" alt="Classic styling">
-        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Styling detail">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80" alt="Barber at work" class="anim scale-up">
+        <img src="https://images.unsplash.com/photo-1585747860019-8e8d8f540d60?w=500&q=80" alt="Barbershop tools" class="anim scale-up delay-1">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80" alt="Shop interior" class="anim scale-up delay-2">
+        <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=500&q=80" alt="Classic styling" class="anim scale-up delay-3">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Styling detail" class="anim scale-up delay-4">
     </div>
 </section>
 
 <section class="services" id="services">
-    <div class="section-head">
+    <div class="section-head anim slide-up">
         <h2>Services</h2>
         <p>Tailored grooming for every gentleman</p>
     </div>
     <div class="services-list">
-        <div class="svc">
+        <div class="svc anim slide-up">
             <div class="svc-info"><h3>Signature Haircut</h3><p>Consultation, precision cut, wash &amp; style</p></div>
             <div class="svc-price">$30+</div>
         </div>
-        <div class="svc">
+        <div class="svc anim slide-up delay-1">
             <div class="svc-info"><h3>Beard Sculpting</h3><p>Hot towel, shaping &amp; premium oil</p></div>
             <div class="svc-price">$20+</div>
         </div>
-        <div class="svc">
+        <div class="svc anim slide-up delay-1">
             <div class="svc-info"><h3>The Complete Experience</h3><p>Haircut and beard sculpting combined</p></div>
             <div class="svc-price">$45+</div>
         </div>
-        <div class="svc">
+        <div class="svc anim slide-up delay-2">
             <div class="svc-info"><h3>Precision Line Up</h3><p>Sharp edges and detail work</p></div>
             <div class="svc-price">$15+</div>
         </div>
-        <div class="svc">
+        <div class="svc anim slide-up delay-2">
             <div class="svc-info"><h3>Classic Hot Towel Shave</h3><p>Straight razor with lather &amp; aftershave</p></div>
             <div class="svc-price">$35+</div>
         </div>
-        <div class="svc">
+        <div class="svc anim slide-up delay-3">
             <div class="svc-info"><h3>Junior Gentleman's Cut</h3><p>Ages 12 and under</p></div>
             <div class="svc-price">$25+</div>
         </div>
     </div>
 </section>
 
+<section class="vid-mid">
+    <video autoplay muted loop playsinline>
+        <source src="https://videos.pexels.com/video-files/7697810/7697810-uhd_2560_1440_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="inner anim slide-up">
+        <h2>The Art of the Cut</h2>
+        <p>Watch precision in motion. Every fade, every line, every detail -- meticulously crafted by hands that have mastered their art.</p>
+        <a href="https://portal.312itconsulting.com" class="btn-w">Book Now</a>
+    </div>
+</section>
+
 <section class="split" id="story">
-    <div class="split-img"></div>
-    <div class="split-text">
+    <div class="split-img anim slide-left">
+        <img src="https://images.unsplash.com/photo-1587909209111-a8cc3b4db587?w=900&q=80" alt="Classic shave">
+    </div>
+    <div class="split-text anim slide-right">
         <h2>The Fantastico Difference</h2>
         <p>Every visit is more than a haircut. It is a ritual. From warm towels and premium beverages to the undivided attention of a master barber, every detail is considered.</p>
         <p>We blend time-honored techniques with modern precision. Book seamlessly online and step into a world of refined grooming.</p>
-        <a href="https://portal.312itconsulting.com" class="btn-solid" style="display:inline-block; margin-top:.5rem; width:fit-content;">Book Now</a>
+        <a href="https://portal.312itconsulting.com" class="btn-w" style="display:inline-block; margin-top:.5rem; width:fit-content;">Book Now</a>
     </div>
 </section>
 
 <section class="reviews">
-    <div class="section-head">
+    <div class="section-head anim slide-up">
         <h2>What Clients Say</h2>
         <p>Real reviews from real gentlemen</p>
     </div>
     <div class="reviews-grid">
-        <div class="review">
+        <div class="review anim slide-up">
             <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
             <blockquote>"A truly premium experience. The attention to detail is unmatched."</blockquote>
             <cite>Marcus T.</cite>
         </div>
-        <div class="review">
+        <div class="review anim slide-up delay-1">
             <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
             <blockquote>"Online booking makes it so easy. I never have to wait."</blockquote>
             <cite>David R.</cite>
         </div>
-        <div class="review">
+        <div class="review anim slide-up delay-2">
             <div class="stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
             <blockquote>"Best barbershop in town. The hot towel shave is incredible."</blockquote>
             <cite>James L.</cite>
@@ -266,22 +312,34 @@
     </div>
 </section>
 
-<section class="bottom-cta">
+<section class="bottom-cta anim slide-up">
     <h2>Your Transformation Awaits</h2>
     <p>Reserve your appointment online and experience the Fantastico difference.</p>
-    <a href="https://portal.312itconsulting.com" class="btn-solid">Book Now</a>
+    <a href="https://portal.312itconsulting.com" class="btn-w">Book Now</a>
 </section>
 
 <footer>
-    <a href="#" class="logo">FANTASTICO</a>
+    <a href="#" class="logo">Fantastico</a>
     <p>Mon-Fri 9AM-7PM | Sat 8AM-5PM | Sun Closed</p>
     <p><a href="https://portal.312itconsulting.com">Book Online</a></p>
 </footer>
 
 <script>
+// Navbar scroll
 window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+        }
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
